@@ -1,0 +1,55 @@
+@startuml
+/'
+    AUTOR:  Marcelo Becerra A.
+    DATE:   2021-09-10
+    THANKS: https://plantuml.com/use-case-diagram
+'/
+
+
+left to right direction
+
+'ACTORS
+Usuario <<Estudiante>> as U
+CADCC <<Estudiantes>>
+Escuela <<Universidad>> as E
+:Otro Usuario: <<Apoyo del Estudiante>> as Ap
+
+rectangle <<Sistema>> {
+    'SOPORTE
+    usecase (Agregar nueva información al sistema) as :CU-AN:
+    'CONSULTAS
+    usecase (Consulta de Información) as CU1
+    'SUGERENCIAS
+    usecase (Habilitar Sugerencias) as CU2
+    'RECORDATORIOS
+    usecase (Habilitar Recordatorios) as CU3
+    'APOYO (INTERVENCIONES)
+    usecase (Habilitar Apoyo) as CU4
+    usecase (Aceptar ser Apoyo) as :CU-4.1:
+    'PRIVACIDAD
+    usecase (//Habilitar/Deshabilitar// conf. de privacidad) as CU5
+    'FUNCIONALIDADES
+    usecase (//Habilitar/Deshabilitar// funcionalidades) as CU6
+}
+
+' SOPORTE
+CADCC -- :CU-AN:
+E --|> CADCC
+' CONSULTAS
+U -- CU1
+'SUGERENCIAS
+note left of CU2: "Se debe elegir alguna opción de periodicidad \n y de contenido"
+U -- CU2
+'RECORDATORIOS
+note left of CU3: "Se debe elegir alguna opción de periodicidad"
+U -- CU3
+'APOYO (INTERVENCIONES)
+U -- CU4
+Ap -- :CU-4.1:
+CU4 ..> :CU-4.1: :requires
+'PRIVACIDAD
+U -- CU5
+U -- CU6
+'FUNCIONALIDADES
+usecase (Habilitar / Deshabilitar funcionalidades) as CU6
+@enduml

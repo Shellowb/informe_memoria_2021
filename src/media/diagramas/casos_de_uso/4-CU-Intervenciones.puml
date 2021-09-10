@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+left to right direction
+'Actors
+Usuario <<Estudiante>> as U
+Usuario <<Apoyo del Estudiante>> as Ap
+'Servidor <<Servidor>> as S
+'Bot <<Chat bot>> as B
+
+rectangle <<Definir periodicidad de sugerencias>> {
+    usecase (Habilitar Apoyo) as CU4
+    usecase (Aceptar ser Apoyo) as :CU-4.1:
+}
+
+
+U --> CU4
+Ap --> :CU-4.1:
+CU4 .> :CU-4.1: :requires
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+left to right direction
+'Actors
+Usuario <<Estudiante>> as U
+CADCC <<Estudiantes>>
+Escuela <<Universidad>> as E
+'Servidor <<Servidor>> as S
+'Bot <<Chat bot>> as B
+
+rectangle <<Definir periodicidad de sugerencias>> {
+    usecase (Habilitar Recordatorios) as CU3
+    usecase (DPS Manualmente) as :CU-3.1:
+    usecase (DPS Opciones) as :CU-3.2:
+    usecase (DPS Default) as :CU-3.3:
+    usecase (Agregar nueva información al sistema) as :CU-AN:
+}
+
+CADCC -- :CU-AN:
+E --|> CADCC
+
+
+note left of CU3: "Se debe elegir alguna opción de periodicidad"
+note left of CU3: ""se elige una opción de contenido"
+
+U --> CU3
+CU3 <.. :CU-3.1: :extends
+CU3 <.. :CU-3.2: :extends
+CU3 <.. :CU-3.3: :extends
+
+
+
+
+@enduml
