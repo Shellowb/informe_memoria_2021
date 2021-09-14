@@ -1,0 +1,96 @@
+@startuml
+<style>
+  partition {
+    RoundCorner 10
+    BackgroundColor #deebfa
+  }
+</style>
+'Actors
+|U| Usuario
+|B| Bot
+
+|U|
+start
+:Accede al bot;
+|B|
+:Muestra las opciones de uso;
+|U|
+if (selecciona opción) then (\nver las \nconfiguraciones\n)
+    :EL sistema muestra
+    la vista de configuración;
+    detach
+endif
+->elige ver los\n proceso vigentes;
+|B|
+:Muestra los
+procesos vigentes;
+|U|
+:selecciona un
+proceso vigente;
+|B|
+:Muestra
+las opciones de:
+ //1. Consulta//
+ //2. Suscripciones//;
+|U|
+ partition suscripción {
+    :Selecciona la opción
+    de **suscripciones**;
+
+    |B|
+    :El sistema muestra
+    los elementos
+    a los que se
+    puede suscribir:
+     //1. Recordatorios//
+     //2. Sugerencias//;
+    |U|
+    #lightblue:Selecciona las **sugerencias**;
+
+    if (permisos habilitados) then (falso)
+    |B|
+        #pink:Muestra aviso de
+        recolección de información
+        ----
+        Se guardan el identificador
+        y permisos deshabilitados
+        temporalmente;
+        |U|
+        if (el usuario acepta) then (falso)
+            |B|
+            :Elimina los datos
+            guardados temporalmente;
+            stop
+        else (verdadero)
+        endif
+    endif
+    -> verdadero;
+    :Guarda los valores con
+    los valores por default,
+    ----
+    le recuerda al usuario la
+    opción de modificar los
+    valores a través de **commandos**;
+
+    :muestra opción para habilitar
+    apoyo;
+    |U|
+    if (usuario habilita apoyo) then (verdadero)
+        |B|
+        :Establece el permiso
+        como verdadero ;
+    else (falso)
+    endif
+    repeat
+        |U|
+        if(usuario satisfecho) then (verdadero)
+            stop
+        endif
+        -> falso;
+        :envía configuración por comandos;
+        |B|
+        :parsea y procesa el comando;
+    repeatwhile (//end//)
+}
+
+@enduml

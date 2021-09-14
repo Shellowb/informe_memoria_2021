@@ -1,0 +1,75 @@
+@startuml
+<style>
+  partition {
+    RoundCorner 10
+    BackgroundColor #deebfa
+  }
+</style>
+
+'Actors
+|U| Usuario
+|B| Bot
+
+|U|
+start
+:Accede al bot;
+|B|
+:Muestra las opciones de uso;
+|U|
+if (selecciona opción) then (\nver las \nconfiguraciones\n)
+    :EL sistema muestra
+    la vista de configuración;
+    detach
+endif
+->elige ver los\n proceso vigentes;
+|B|
+:Muestra los
+procesos vigentes;
+|U|
+:selecciona un
+proceso vigente;
+|B|
+:Muestra
+las opciones de:
+ //1. Consulta//
+ //2. Suscripciones//;
+
+partition Consulta {
+
+    :Selecciona la opción de consultas;
+    |B|
+    :Muestra las opciones disponibles
+     //1. Definición//
+     //2. Fechas//
+     //3. Requisitos//
+     //4. Actores//
+     //5. FAQ;//;
+    |U|
+    :Selecciona una de las opciones;
+    |B|
+    : El sistema muestra
+    la información deseada
+    de forma concisa
+    y un enlace a la página de ayuda;
+    :El sistema muestra
+    la opción de valorar la consulta;
+    |U|
+    :El alumno evalúa la respuesta;
+    |B|
+    :El sistema almacena
+    la valoración del alumno;
+    :El sistema le muestra
+    la opción de contactar
+    a un asistente;
+    |U|
+    if (El alumno evalúa \ncontactar a un asistente) then (elige no contactarlo)
+    stop
+    endif
+    -> Decide si contactarlo;
+    |B|
+    :EL bot notifica a los administradores;
+    detach
+
+}
+
+@enduml

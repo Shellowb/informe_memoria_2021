@@ -1,0 +1,24 @@
+@startuml
+'Actors
+|U| Usuario
+|B| Bot
+
+|U|
+start
+:Usuario accede
+al bot;
+|B|
+:Muestra las
+opciones de uso;
+|U|
+if (\nEl alumno selecciona\n una opción\n) then (ver las configuraciones)
+    :EL sistema muestra
+    la vista de
+    configuración;
+    detach
+endif
+
+
+end
+
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+<style>
+  partition {
+    RoundCorner 10
+    BackgroundColor #defaeb
+  }
+</style>
+
+'Actors
+|U| Usuario
+|B| Bot
+
+
+|U|
+start
+:Usuario accede al bot;
+|B|
+:Muestra las opciones de uso;
+|U|
+if (El alumno selecciona una opción) then (ver los proceso vigentes)
+    |B|
+    : muestra
+    los procesos vigentes;
+    detach
+endif
+->ver configuración;
+|B|
+:El sistema muestra
+las opciones de
+configuración
+ //1. Permisos//
+ //2. Suscripciones//;
+|U|
+#lightblue:Selecciona la opción **Suscripciones**;
+|B|
+:Muestra una lista
+de suscripciones
+y le explica como
+eliminarlas
+----
+1 **Recordatorios** de trabajo de título
+2 **Requisitos:Temas de Memoria** de trabajo de título
+...;
+note right
+    //Si no hay información//
+    //guardada muestra la //
+    //misma interfaz pero//
+    //una lista vacía//
+end note
+|U|
+:Selecciona una o un rango;
+|B|
+:Muestra mensaje de confirmación;
+|U|
+:Confirma la eliminación;
+|B|
+:Elimina las suscripciones seleccionadas;
+
+stop
+
+@enduml

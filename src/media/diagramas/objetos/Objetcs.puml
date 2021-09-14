@@ -1,0 +1,116 @@
+@startuml
+'https://plantuml.com/object-diagram
+title Diagrama de Objetos:
+
+'ACTORS
+object "Bot" as B
+object "Usuario" as U
+object "Usuario de Apoyo" as UA
+object "Centro de Estudiantes" as CADCC
+object "Escuela" as E
+'ACTORS RELATED
+object "Permisos de Usario" as PU
+object "Suscripciones" as CUS
+object "Tipos de Periodicidad" as TP
+object "Estado de Periodicidad" as ETP
+'INFORMATION
+object "Procesos" as P
+object "Catálogo de encargados" as EP
+object "Catálogo de hitos" as HP
+object "Catálogo de requisitos" as RP
+object FAQ
+
+object "Definiciones" as D_P
+object "Encargados" as E_P
+object "hitos" as H_P
+object "requisitos" as R_P
+'INTERACTION
+object "Catálogo de Feedback" as CF
+object  "Mensajes" as M
+
+'USER
+U : identificador
+
+UA : id_usr_objetivo
+UA : contacto
+UA : tipo_contacto (email, telegram)
+
+PU : id_usr_objetivo
+PU : identificador
+PU : Suscripciones
+PU : contacto_apoyo
+
+CUS : id_usr_objetivo
+CUS : proceso
+CUS : elemento_del_proceso
+CUS : estado_de_notificación
+CUS : próxima_notifación
+
+TP : id
+
+ETP : id_periocidad
+ETP : next_state
+
+'PROCESO
+P : id
+P : name
+P : encargados
+P : hitos
+P : requisitos
+P : FAQ
+
+D_P : proceso
+D_P : descripción
+D_P : link_more_info
+
+EP : proceso
+EP : encargado
+EP : rol
+EP : link_more_info
+
+E_P : id
+E_P : nombre
+E_P : contacto
+
+HP : proceso
+HP : hito
+
+H_P : id
+H_P : name
+H_P : fecha_limite
+
+RP : proceso
+RP : hito
+
+R_P : nombre
+R_P : catálogo_adicional
+R_P : ejemplo_de_cumplimiento
+
+FAQ : proceso
+
+'RELATIONS
+
+'---Proceso
+E "1"--"1" CADCC : entrega información
+CADCC "1"--"*" P: CRUD procesos
+P "1"--"1" D_P: Definción del \n proceso
+P "1"--"*" EP: rol encargado \n en el proceso
+EP "*"--"1" E_P : Encargado
+P "1"--"*" HP: hitos del proceso
+HP "*"--"1" H_P: hito
+P "1"--"*" RP: requisitos del proceso
+RP "*"--"1" R_P: requisito
+P "1"--"*" FAQ: preguntas frecuentes\n del proc.
+
+B -- M
+B -- P
+
+U -- M
+U -- PU
+U -- UA
+U -- CUS
+
+CUS -- P
+
+CF -- P
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+'Actors
+|U| Usuario
+|B| Bot
+
+|U|
+start
+end
+
+@enduml
