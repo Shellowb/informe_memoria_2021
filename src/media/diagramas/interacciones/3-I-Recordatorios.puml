@@ -1,0 +1,72 @@
+@startuml 3-I-Recordatorios
+title D. Interacción - Recordatorios
+
+actor "Usuario" as U
+entity "bot" as B
+database "db.Procesos" as db.P
+database "db.Usuario" as db.U
+entity "Usuario" as I.U
+database "db.Suscripciones" as db.US
+entity "Suscripción Usuario" as I.US
+database "db.Permisos" as db.UP
+entity "Permisos Usuario" as I.UP
+
+
+U -> B : ver procesos disponibles
+activate B
+    B -> db.P: obtenerProcesosVigentes()
+    db.P -> B: procesos vigentes
+B -> U : mostrar procesos disponibles
+deactivate B
+
+U -> B : seleccionar un proceso vigente
+activate B
+B -> U : \tMuestra opciones \n\tde interacción con\n\t el proceso
+deactivate B
+
+
+U -> B : Seleccionar **Suscribirse a los Recordatorios**
+activate B
+B -> U: Solicitud de acceso a la información
+alt Suscripciones deshabilitadas: \nUsuario **No acepta** almacenar información
+    U -> B: No Acepta almacenar información
+    B -> U: Muestra mensaje de éxito
+    
+else Suscripciones deshabilitadas: \nUsuario **acepta** almacenar información
+    U -> B: Acepta almacenar información
+    ' Nuevo Usuario
+    B -> db.U: registrarUsuario(usuario)
+    db.U -> I.U **: crearNuevoUsuario()
+    I.U -> db.U: Nuevo registor creado
+    db.U -> B: usuario registrado
+    B -> db.UP: asociarPermisos(usuario)
+    db.UP -> I.UP **: crearPermisos(usuario)
+    I.UP -> db.UP: permisos creados
+    db.UP -> B: permisos asociados
+    ' Asociar Permisos
+    B -> db.UP: actualizarPermisos(usuario, permisos_habilitados)
+    db.UP -> I.UP: actualizarPermiso(usuario, permisos_habilitados)
+    I.UP -> db.UP : permiso Actualizado
+    db.UP -> B: permisos actualzados
+    ' Nueva Suscripción
+    B -> db.US: crearNuevaSuscripción(usuario, contenido, periocidad_default)
+    db.US -> I.US**: crearSuscripción(usuario, contenido, periocidad_default)
+    I.US -> db.US: Suscripción creada
+    db.US -> B: Nueva Suscripción creada
+    B -> U: Muestra mensaje exito
+    note over U, B
+    La periodicidad se establece por defecto,
+    si alguien quiere personalizar el intervalo
+    puede usar un comando especifico
+    end note
+
+else Usuario tiene habilitadas las Suscripciones
+    B -> db.US : alamcenarNuevaSuscripción(usuario,recordatorio)
+    db.US -> I.US**: crearSuscripción(usuario, contenido, periocidad_default)
+    I.US -> db.US: Suscripción creada
+    db.US -> B: Nueva Suscripción creada
+    db.US -> B: nueva suscripción almacenda
+    B -> U: Recordatorios activados
+end
+deactivate B
+@enduml

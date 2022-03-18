@@ -1,0 +1,46 @@
+
+@startuml 3-E-Recordatorios
+title D. Estado - Recordatorios
+'Ingreso general
+state "Ver Opciones de Uso" as 1
+state "Seleccionar Opción" as 2
+state c <<choice>>
+state "Configuración" as 3
+state "Procesos Vigentes" as 4
+'Recordatorios
+state "Seleccionar Proceso" as C.P
+state "Proceso Seleccionado" as P
+state "Seleccionar Opción\n (Catalogo de Sus)" as C.Pa
+state "**Recordatorios**" as R
+state "Aceptar Permisos" as C.UP
+state c1 <<choice>>
+state "Permisos Aceptados" as UP.true
+state "Permisos Rechazados" as UP.false
+state "Recordatorio Establecido" as R.S
+state "Modificar Recordatorio" as R.M
+state c2 <<choice>>
+C.Pa : Recordatorios
+C.Pa : Sugerencias
+C.Pa : Requisitos
+C.Pa : Novedades
+
+[*] -> 1
+1 -> 2
+2 -> c
+c --> 3: ir a configuraciones
+c --> 4: ver proceso
+
+4 -right-> P: seleccionar proceso
+P -right-> C.Pa
+C.Pa --> c2
+c2 -> ...: Otras opciones
+c2 -left-> C.UP: **Recordatorios**
+C.UP -down-> c1
+c1 --> UP.true : True
+c1 --> UP.false: False
+UP.true --> R.S
+UP.false --> [*]
+R.S ->  [*]
+R.S --> R.M
+R.M --> R.S
+@enduml

@@ -1,0 +1,156 @@
+@startuml
+'https://plantuml.com/object-diagram
+title Diagrama_de_Objetos:
+
+'ACTORS
+object "Bot" as B
+object "Usuario" as U
+object "Usuario de Apoyo" as UA
+object "Centro de Estudiantes (admin)" as CADCC
+object "Escuela" as E
+
+'ACTORS RELATED
+object "Permisos de Usurio" as UP
+object "Suscripciones" as US
+
+'INFORMATION
+' ---- Proceso
+    object "Proceso" as P
+    object "Instancia" as PI
+    object "Categoría" as PC
+    object "Preguntas Frecuentes" as PF
+    ' ---- Instancia de un proceso
+        object "Pasos" as PIP
+        object "Novedades" as PIN
+        object "Definiciones" as PID
+        object "Encargados" as PIE
+        object "Catalogo de  suscripción" as PIS
+        ' --- Relacionados a los pasos
+            object "Requisitos" as PIPR
+
+'INTERACTION
+object "Chat" as C
+    object "Mensajes" as M
+object "Valoraciones" as V
+object "Notificaciones" as N
+
+'AUDIT
+object "Audit Cambios Admin" as A
+
+'USER
+    U : identificador
+    UA : id_usr_objetivo
+    UA : contacto
+    UA : tipo_contacto (email, telegram)
+    CADCC : usermane
+    CADCC : password
+
+'USER RELATED
+    UP : id_usr_objetivo
+    UP : identificación_disponible
+    UP : Suscripciones_habilitadas
+    UP : contacto_apoyo_habilitado
+    '--
+    US : id_usr_objetivo
+    US : elemento_a_suscribir
+    US : mensaje (que notificar)
+    US : próxima_notificación
+
+'AUDIT
+    A : id
+    A : topico (proceso, instancia)
+    A : fecha de creación
+    A : ultima actualización
+    A : está publicado
+    A : creado por
+    A : actualizado por
+
+
+'PROCESO (tipo de la instancia)
+    P : nombre
+    P : descripción
+    P : descripción del banner
+    P : icono
+    P : A_id (auditoría)
+
+    'Instancia
+    PI : name
+    PI : proceso
+    PI : A_id (audit)
+        ' Pasos" as PIP
+        PIP : fecha de inicio
+        PIP : fecha de termino
+        PIP : nombre
+        PIP : descripción
+        PIP : instancia
+        PIP : A_id
+            'Requisitos
+            PIPR : paso
+            PIPR : nombre
+            PIPR : Descripción_breve
+            PIPR : link_Ejemplo
+            PIPR : link_catalogo_relacionado
+        ' Novedades" as PIN
+        PIN : descripción
+        PIN : instancia
+        PIN : A_id
+        ' Definiciones" as PID
+        PID : instancia
+        PID : infografía
+        PID : link
+        PID : A_id
+        ' Encargados" as PIE
+        PIE : instancia
+        PIE : nombre
+        PIE : rol
+        PIE : contacto
+        PIE : A_id
+        ' Catalogo de  suscripción" as PIS
+        PIS : instancia
+        PIS : elemento_para_suscribir
+        PIS : A_id
+
+
+
+'RELATIONS
+E "1"--"1" CADCC : entrega información
+CADCC "1"--"*" P: CRUD procesos
+'---Proceso
+P "1"--"*" PI: Instancia del Proceso
+P "1"--"*" PC: Categorías\ndel Proceso
+P "1"--"*" PF: preguntas frecuentes\n del proc.
+    ' Process Instance
+    PI "1"--"*" PIN
+    PI "1"--"*" PIS
+    PI "1"--"1" PID: Definción del \n proceso
+    PI "1"--"*" PIE: rol encargado \n en el proceso
+    PI "1"--"*" PIP: hitos del proceso
+    PIP "1"--"*" PIPR: requisitos del proceso
+
+'---BOT
+B -- C
+B -- P
+'---Chat
+C -- M
+
+'---Usuario
+U -- C
+U -- UP
+U -- UA
+U -- US
+
+
+'--- Audit
+CADCC -- A
+A -- P
+A -- PC
+A -- PI
+A -- PF
+A -- PIP
+A -- PIN
+A -- PID
+A -- PIE
+A -- PIS
+
+
+@enduml
