@@ -1,0 +1,210 @@
+{
+  "actors": [
+    {
+      "id": "c2b2ae07-5a55-4d10-8242-d14c9d8ba59c",
+      "text": "Estudiante DCC",
+      "type": "istar.Role",
+      "x": 169,
+      "y": 302,
+      "customProperties": {
+        "Description": ""
+      },
+      "nodes": [
+        {
+          "id": "347bc04d-07d0-4cf5-a931-16ff45e51c3f",
+          "text": "Contenido Definido",
+          "type": "istar.Goal",
+          "x": 346,
+          "y": 407,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "b14d8342-cfee-4489-9cdc-f9288bbfdf25",
+          "text": "Información Obtenida",
+          "type": "istar.Goal",
+          "x": 234,
+          "y": 473,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "76b8692e-41ad-46eb-8b6d-523e59124d0e",
+          "text": "Obtener información del proceso",
+          "type": "istar.Goal",
+          "x": 239,
+          "y": 321.5,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+          "text": "Solicitar Contenido",
+          "type": "istar.Task",
+          "x": 283,
+          "y": 592,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+          "text": "Consultar Contenidos Disponibles",
+          "type": "istar.Task",
+          "x": 400,
+          "y": 482,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "e2aec9cd-ff0b-48ca-84d7-7d2ef66d4434",
+      "text": "Bot",
+      "type": "istar.Agent",
+      "x": 682,
+      "y": 330,
+      "customProperties": {
+        "Description": ""
+      },
+      "nodes": [
+        {
+          "id": "0a5a16e0-5278-483b-80da-ef7fb8f02838",
+          "text": "Entregar Infromación",
+          "type": "istar.Task",
+          "x": 743,
+          "y": 407,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    }
+  ],
+  "orphans": [],
+  "dependencies": [
+    {
+      "id": "48e01e81-78ee-4460-b2ff-6c45b0ae3f6d",
+      "text": "Responder consulta",
+      "type": "istar.Task",
+      "x": 553,
+      "y": 415,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "d86a3a67-c3cc-4d50-b79d-f3c5b57f43a1",
+      "text": "Contenidos Disponibles",
+      "type": "istar.Resource",
+      "x": 548,
+      "y": 531,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "bf811416-e628-41cb-976f-5b290c3b5c6e",
+      "text": "Procesar consulta",
+      "type": "istar.Task",
+      "x": 569,
+      "y": 603,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    }
+  ],
+  "links": [
+    {
+      "id": "98d2e581-fbf5-4659-805a-15dd83340a6c",
+      "type": "istar.AndRefinementLink",
+      "source": "347bc04d-07d0-4cf5-a931-16ff45e51c3f",
+      "target": "76b8692e-41ad-46eb-8b6d-523e59124d0e"
+    },
+    {
+      "id": "203b3d30-6201-472f-88b9-92ec7c257e6c",
+      "type": "istar.AndRefinementLink",
+      "source": "b14d8342-cfee-4489-9cdc-f9288bbfdf25",
+      "target": "76b8692e-41ad-46eb-8b6d-523e59124d0e"
+    },
+    {
+      "id": "b8a692d7-42f9-42c7-b751-4e47924229b1",
+      "type": "istar.OrRefinementLink",
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "b14d8342-cfee-4489-9cdc-f9288bbfdf25"
+    },
+    {
+      "id": "84a82c08-5f11-4118-b0c9-9f049d854f36",
+      "type": "istar.OrRefinementLink",
+      "source": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+      "target": "347bc04d-07d0-4cf5-a931-16ff45e51c3f"
+    },
+    {
+      "id": "7a9b06b6-7dd2-4f3f-ab11-966c2c101a12",
+      "type": "istar.DependencyLink",
+      "source": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+      "target": "48e01e81-78ee-4460-b2ff-6c45b0ae3f6d"
+    },
+    {
+      "id": "498b4439-d48c-40f1-a62b-a3f74e93c06f",
+      "type": "istar.DependencyLink",
+      "source": "48e01e81-78ee-4460-b2ff-6c45b0ae3f6d",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "3007d3b1-aad5-419c-b6f8-487981e13989",
+      "type": "istar.DependencyLink",
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "d86a3a67-c3cc-4d50-b79d-f3c5b57f43a1"
+    },
+    {
+      "id": "a918a593-06a2-447c-a91d-b8a1fe10f1b2",
+      "type": "istar.DependencyLink",
+      "source": "d86a3a67-c3cc-4d50-b79d-f3c5b57f43a1",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "5b13e505-135c-4546-9992-6fdbad3208e0",
+      "type": "istar.DependencyLink",
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "bf811416-e628-41cb-976f-5b290c3b5c6e"
+    },
+    {
+      "id": "8c2527c4-ad27-43e0-a0a7-c8966506164a",
+      "type": "istar.DependencyLink",
+      "source": "bf811416-e628-41cb-976f-5b290c3b5c6e",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    }
+  ],
+  "display": {
+    "76b8692e-41ad-46eb-8b6d-523e59124d0e": {
+      "width": 100.80000305175781,
+      "height": 53.30000305175781
+    },
+    "1de186c3-c3d4-4821-b8a2-8d3438462636": {
+      "width": 110.80000305175781,
+      "height": 52.80000305175781
+    }
+  },
+  "tool": "pistar.2.0.0",
+  "istar": "2.0",
+  "saveDate": "Mon, 02 Aug 2021 02:50:16 GMT",
+  "diagram": {
+    "width": 2123,
+    "height": 1300,
+    "name": "Consultas",
+    "customProperties": {
+      "Description": ""
+    }
+  }
+}

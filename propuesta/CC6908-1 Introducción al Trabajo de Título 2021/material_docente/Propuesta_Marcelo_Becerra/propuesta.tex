@@ -1,0 +1,243 @@
+\documentclass[guia]{upropuesta}
+
+\title{Mejora de un sistema de soporte digital para estudiantes del DCC}
+
+\author{Marcelo Becerra A.}
+\guia{Jocelyn Simmonds}
+\date{2021}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[fixlanguage]{babelbib}
+\usepackage{url}
+
+% AGREGADOS por MARCELO BECERRA A.
+\usepackage{subfigure}
+
+\graphicspath{{imagenes/}}
+
+\begin{document}
+
+\maketitle
+
+%\begin{pauta}
+% Se debe quitar la guía antes de entregar el documento.
+
+% En la primera línea del \TeX: 
+
+% \begin{verbatim}
+% \documentclass[guia]{upropuesta}
+% \end{verbatim}
+
+% %Quitar la opción \texttt{guia}:
+
+% \begin{verbatim}
+% \documentclass{upropuesta}
+% \end{verbatim}
+
+% Además, hay que reemplazar los datos acá:
+
+% \begin{verbatim}
+% \author{Juan Peréz}
+% \guia{Jocelyn }
+% \date{20XX}
+% \end{verbatim}
+
+% Como una aproximación, se espera que la propuesta sea de 5--10 páginas.
+
+% [No hay que poner texto acá. Se puede empezar directamente con la introducción.]
+% \end{pauta}
+
+\section{Introducción}\label{sec:intro}
+    % General -> Particular
+    \par La cantidad de alumnos del Departamento de las Ciencias de la Computación (DCC), ha aumentado considerablemente en los últimos 5 años, 200 alumnos aproximadamente (212) \cite{CADCC2016}, \cite{CaDCC2018}, \cite{CADCC2021}. Este aumento viene acompañado de una serie de desafíos, no solo en la docencia, sino en los procesos administrativos. 
+    \par Uno de los focos de estos desafíos son los procesos de titulación, que también se han visto afectados por este aumento, casi el doble de alumnos en 7 años \cite{ARANCIBIA2021}. Este tipo de trabajo tiene asociados procedimientos, un tipo específico de contenido, requisitos de formato, entre otros aspectos que implican una incertidumbre por parte de los alumnos. En relación a ellos hay varias fuentes de información que atañen a diversos aspectos de estos trabajos como la wiki de titulación, las páginas del centro de alumnos, publicaciones oficiales en U-Cursos, etc. A pesar de tener estos recursos disponibles, muchas veces, la mayoría de los estudiantes suele preguntar directamente a sus profesores y, funcionarios como la secretaria del departamento, suelen recibir la mayor cantidad de preguntas sin resolver por parte de los alumnos
+    \par parr cantidada resolver de dudas n o resultas peor parte de lste tipcibir la mayoo de situaciones, diversas organizaciones proveen asistencia y soporte a sus alumnos
+    \par Esta vía de ampliar personal, debe ser debidamente justificada, y consensuada \cite{Chile2014}. Por otra parte, tampoco es lo que buscan los estudiantes. Y es justamente en este ambiente, que el proyecto Mesa de Ayuda Virtual se posiciona como una buena alternativa para asistir a los estudiantes y al mismo tiempo lograr moverse junto con una sociedad en cambio.
+    \par El proyecto Mesa de Ayuda Virtual, es un proyecto iniciado por Pablo Arancibia Barahona, egresado del DCC, que busca responder a la necesidad de mejorar el proceso de titulación de alumnos(as). Actualmente dividido en dos áreas: Un \textit{bot}, con funcionalidades como preguntas frecuentes etiquetadas por proceso, capacidad feedback por el usuario y contactar a un asistente personal. La página web, cuenta con un \textit{front-end} para alumnos y otro para administradores, en ellos se puede acceder a los procesos vigentes con sus preguntas frecuentes, a un chat directo con los estudiantes, categorizar preguntas, abrir y modificar procesos, entre otros.
+    \par Este proyecto, responde a las necesidades del estudiantado, pues fue diseñado a partir de la información levantada en el departamento y la consideración de las necesidades allí expuestas. Fue validado por la docencia y el centro de estudiantes y ha finalizado su primera etapa de desarrollo. Actualmente, soporta más procesos como prácticas profesionales.
+    \par Dentro de las conclusiones más relevantes del trabajo de Arancibia, destaca el hecho de que la mayoría de los encuestados, dijo que optaría por usar el servicio del \textit{bot} de \textit{Telegram}. Esto en un contexto dónde no hay un servicio ya implementado, es de suma relevancia, puesto que a pesar de que se podría generar la mejor herramienta, si esta no tiene público, no tendría razón de ser.
+
+    % \begin{pauta}
+    % Dar una introducción al contexto del tema.
+    
+    % Explicar, en términos generales, el problema abordado.
+    
+    % Motivar la necesidad, la importancia y/o el valor, de tener una (mejor) solución.
+    
+    % [1--2 páginas]
+    % \end{pauta}
+
+\newpage
+\section{Situación Actual}\label{sec:sa}
+    El proyecto actualmente, aunque no esta desplegado, si está desarrollado y se han validado sus funcionalidades con usuarios. Y algunos actores se han comprometido con su desarrollo. Uno de los agentes relevantes en el proceso actual es el Centro de Alumnos del DCC (en adelante CADCC), ya que es uno de los más comprometidos con el proyecto. Y qué será fundamental en su primer arranque, así como en las validaciones. Posiblemente, será el principal contribuyente a la información. 
+    \par Hay posibles participantes como académicos y funcionarios, que si bien han validado la propuesta, hoy no son parte del ecosistema que se busca generar. Esto, porque actualmente no consideran que la solución alivie su carga laboral, y por ende no tienen una motivación para integrarse al proyecto.
+    \par Tiene un modelo \textit{API Rest}: el \textit{back-end}, administra los datos en MongoDB, dentro de los cuales están los procesos (cómo titulación, memoria, prácticas, proyecto de Software), sus instancias y sus preguntas frecuentes, también maneja los usuarios con sus respectivos roles. El bot considera en su modelo de atención llegar a la información deseada en aproximadamente 3 clicks, permite enlazar la comunicación con un asistente en tiempo real, y permite al usuario dar feedback, sobre si la información fue útil o no. Ocupa \textit{django chanels} para enlazar la conversación con un asistente en la página web y \textit{redis} para la memoria caché. La página web, permite acceder a toda la información categorizada por parte del alumno, mientras que a los adminsitradores, les permite categorizar preguntas, administrar los procesos y sus instancias, agregar información y contestar a los alumnos de manera anónima.
+    \par Una de las principales oportunidades en relación a lo anterior y la vez una de las grandes restricciones, es la capacidad de hacer este sistema extensible. En ese sentido surge la pregunta ¿a dónde apuntar el desarrollo? 
+    \par A partir de los resultados de Arancibia, se concluye, que uno de los elementos que mejor se integra al flujo natural del alumnado es el \textit{bot} \cite{ARANCIBIA2021}. Tanto por aceptación original descrita en su trabajo, como por la inserción y presencia natural que tienen estos servicios en la comunidad del DCC. A pesar de esto, hay ciertos elementos de en la solución actual, que pueden frenar la adopción del bot.
+    % Reestructuración y  Refactoring
+    \par Primero, su código no es extensible, dado que no hay una implementación modular y bien estructurada, tal y como fue expresado por su creador, es funcional, sin embargo, con el objetivo de que el proyecto sea escalable en el tiempo, se plantea una modularización del actual código para así hacerlo mas legible y extensible. Hay que optimizar el manejo de tareas asíncronas como lo son los mensajes por múltiple usuarios en el bot. Se debe corregir la view (Django) del bot,  porque el código presenta una carencia de entendibilidad, debido a que toda la lógica se concentra en un solo modulo, a pesar de la naturaleza de las interacciones del usuario.
+    %% Personalización y Relevancia
+    % Que es transversal a todo usuario?
+        % Horizontes de desarrollo 
+        % Confianza
+    \par La confianza en un sistema de información, es de suma relevancia \cite{Marsh2003}. En ese sentido, se sabe que a medida que aumenta el número de traspasos de información, sobre todo entre agentes humanos, hay un riesgo de pérdida y modificación, tanto por las fallas propias de los canales de comunicación, como por la acción de los agentes involucrados. Actualmente, este sistema no tiene ninguna forma de generar información por si mismo, tampoco puede acceder a las fuentes primarias de información por su cuenta. Por lo tanto los encargados de guardar la información son vitales en la calidad de esta. Por otro lado las fuentes que los mismos usen, determinarán su veracidad, lo que afecta directamente su confiabilidad.
+    
+    \par Debido a lo anterior, incluir actores que sean fuentes primarias de información es relevante y minimiza los cambios a la misma. Así como también es importante que se pueda verificar su fuente y vigencia.
+    
+    %%Qué es individual?
+    %% Subscripción
+     \par Dentro de sus capacidades, el \textit{bot} solo guarda información temporalmente, no guarda ningún tipo de preferencias del alumno, más allá de la interacción puntual. La retroalimentación corresponde solo a una evaluación simple del servicio, y no permite generar ningún otro tipo de información, como la calidad de la información o su relevancia real para el estudiante. Al ir más allá y examinar detenidamente el modelo de datos, se puede corroborar que no existe ningún tipo de \textit{features} ajustadas a un usuario en particular.
+     
+     \par La inclusión de un valor personal, en modelos de subscripción pagados es uno de lo factores que define el \textit{engagement}\cite{Hansen2018} (o la adopción por los usuarios). Aunque este sistema no es pagado, generar un buen modelo de subscripción es clave para darle un valor personal, que sería el gran diferenciador con soluciones existentes como una wiki o novedades en u-cursos, porque permitiría al usuario estar directamente relacionado con aquello que es importante para él, disminuye la interacción con información irrelevante, y mejora la experiencia general del usuario.
+     
+    
+    
+ 
+    
+
+    % \begin{pauta}
+    % Discutir las soluciones o recursos existentes relacionados con el problema. Justificar por qué es necesario un trabajo novedoso.
+    
+    % [1--2 páginas]
+    % \end{pauta}
+
+    % Ejemplos de referencias:
+    
+    % \begin{itemize}
+    %   \item Conferencia~\cite{CorlessJK97}
+    %   \item Revista~\cite{NewmanT42}
+    %   \item Tesis~\cite{Turing38}
+    %   \item Padrón2016\cite{CADCC2016}
+    % \end{itemize}
+
+% DBLP es una buena fuente de referencias en formata "BibTeX"
+% en Ciencias de la Computación
+% p.ej., https://dblp.org/pers/hd/t/Turing:Alan_M=
+
+\newpage
+\section{Objetivos}\label{chap:obj}
+% \begin{pauta}
+% Describir las \textit{metas} del trabajo. Hay que contestar acá: ¿\textit{qué} quieres lograr? (La sección que sigue contestará la pregunta: ¿\textit{cómo} lo vas a lograr?)
+
+% Ejemplos de metas: lograr que X sea (más) eficiente, usable, seguro, completo, preciso, barato, informativo, posible por primera vez, etc.
+
+% Ejemplos de \textit{no} metas: implementar algo en Javascript, aplicar modelo Y sobre los datos, etc. (Estas cosas van en la descripción de la \textbf{Solución Propuesta}.)
+
+% Al final del trabajo, debería ser factible saber si se ha logrado los objetivos enumerados acá, o saber cuán bien se han logrado, o no. Por ejemplo, si la meta es tener algo eficiente en términos de tiempo, debería haber una forma de evaluar o estudiar los tiempos. Acá tendrás que definir la forma general en que se podrá evaluar el trabajo.
+
+% [No hay que poner texto acá. Se puede empezar directamente con el objetivo general.]
+% \end{pauta}
+
+  \subsection*{Objetivo General}\label{sec:obj-g}
+       El objetivo general es extender el sistema actual, agregando funcionalidades que permitan crear un modelo de subscripción, que sea: extensible, personalizado y confiable. El cual será actualizado principalmente por el CADCC, con miras de integrar otros actores posteriormente. Favoreciendo la adopción y continuidad de este servicio.
+       %% Mejorar el bot de telegram para la creac--- personalización
+       %% a traves de añadir funcionalaidades de subscripbción y
+       %% Mayor feedback.
+        %   \begin{pauta}
+        %   Un \textit{resumen conciso} (no más de un párrafo) de la meta principal del trabajo, es decir, qué quieres lograr con el trabajo (o qué significa ``éxito'' en el contexto del trabajo).
+          
+        %   (``Titularse'' no es una repuesta válida. :))
+          
+        %   [1 párrafo]
+        %   \end{pauta}
+        
+    \subsection*{Objetivos Específicos}\label{sec:obj-e}
+        \begin{enumerate}
+            \item Analizar la solución existente, con el fin de identificar  que modificaciones son relevantes. Tanto para que el modelo de datos soporte las nuevas funcionalidades y cómo se debe reestructurar el código.
+            \item Implementar y probar las modificaciones para asegurar la integridad del modelo de datos, del código y permitir su extensibilidad a través de la modularidad lógica.
+            % Mantener un promedio de modificaciones
+            \item Agregar features de confiabilidad que permitan: añadir información a las respuestas y mejorar el modelo de feedback del usuario, para que se pueda obtener más información como su vigencia.
+            %: se añadirán y mostrarán al usuario, la fuente de una respuesta y la última validación de la información. En caso de que el feedback a la respuesta sea no conforme, se le dará la opción de categorizar el mensaje como no vigente.
+            \item Crear un modelo y funcionalidades de subscripción personalizadas: que contemplen una búsqueda personalizada de procesos, un elemento suscriptor, variables relevantes de notificar y un modelo de notificaciones y data del alumno, entre otras features relevantes para los alumnos.
+            \item Implementar las nuevas funcionalidades asegurando que sean aquellas relevantes para los alumnos.
+            
+        \end{enumerate}
+         
+    \subsection*{Evaluación}\label{sec:eval}
+        \begin{enumerate}
+            \item Se pueden identificar en el modelo las nuevas entidades y relaciones que se corresponden con las funcionalidades descritas. puede asociar cada componente de la arquitectura lógica del bot.
+            \item El sistema soporta las funcionalidades fundamentales que ya presenta, se pueden hacer operaciones CRUD a través de los endpoints. Cada componente de la arquitectura lógica del bot tiene su representación en código.
+            \item  Se puede ver la fuente del la respuesta en un mensaje, así cómo la última actualización de esta información. El usuario puede catalogar una respuesta como no-vigente.
+            \item Validar el modelo de subscripción con estudiantes, profesores y funcionarios a través de entrevistas y focus groups (de entre 5 a 10 personas). Con el foco en las funcionalidades, relevancia para el usuario y privacidad.
+            \item Validar la implementación de las nuevas funcionalidades, a través de una investigación con demos a estudiantes. 
+        \end{enumerate}
+        
+        %     %   \begin{pauta}
+        %     %   Una \textit{lista} de los hitos principales que se quieren lograr para (intentar) cumplir con el objetivo general. Divide el objetivo general en varios hitos que formarán las etapas del trabajo.
+              
+        %     %   Puede ser algo como: (1) obtener un conjunto de datos preciso, (2) diseñar un modelo de datos completo, (3) implementar un back-end que permita hacer tales consultas de forma eficiente, (4) diseñar e implementar una interfaz usable. Debería haber más detalles, pero no más de un párrafo por hito. 
+              
+        %     %   Los objetivos específicos deberían ``sumar'' al objetivo general.
+              
+        %     %   [Una lista 3--7 párrafos]
+        %     %   \end{pauta}
+              
+        %     %   \begin{enumerate}
+        %     %     \item ...
+        %     %     \item ...
+        %     %   \end{enumerate}
+          
+        %   \subsection*{Evaluación}\label{sec:eval}
+          
+        %   \begin{pauta}
+        %   Describe cómo vas a poder evaluar el trabajo en términos de cuán bien  cumple con los objetivos planteados. Se pueden discutir los datos, las medidas, los usuarios, las técnicas, etc., utilizables para la evaluación.
+          
+        %   [1--2 párrafos]
+        %   \end{pauta}
+
+\newpage
+\section{Solución Propuesta}\label{sec:sol}
+    \par Para poder llevar a cabo los objetivos anteriormente descritos, se propone agruparlos en x fases. Pensadas en la lógica que abarca cada uno de estos objetivos. 
+    
+    % Modificaciones
+    \subsection{Análisis y modificaciones de la solución actual}
+    \par Para asegurar la mantenibilidad y rescatar las funcionalidades críticas. Se estudiará en detalle la solución actual. Con esto se busca identificar todos aquellos aspectos relevantes de la solución actual, así como aquellos que necesiten una modificación, ya sea reestructuración o re-implementación. A partir de este proceso se diseñarán y usarán \textit{tests} que sirvan para validar como el sistema actual responde a los objetivos originales y los planteados en esta propuesta.
+    \par Luego se implementarán: todas las modificaciones en el modelo de datos, para que admita las nuevas funcionalidades de confiabilidad, y algunas métricas que puedan ser relevantes y, las refactorizaciones en el código (del bot) para modularizar la solución actual y darle una estructura lógica, que permitan entender el sistema y hacerlo extensible.
+    \par luego con el conjunto de test diseñados se probará que las modificaciones no afectaron la funcionalidad original ya implementada. También se espera poder realizar test de los nuevos enpoints para las operaciones CRUD, que se requieran para las funcionalidades de confiabilidad.
+    \par Finalmente se espera poder obtener métricas de satisfacción que garanticen los objetivos uno al tres planteados para esta fase, desde el back-end del sistema.
+    
+    \subsection{Integración de nuevas capacidades}
+    % Features de confiabilidad
+    \par En primer lugar se buscará agregar a la interfaz del bot los elementos ya testeados de confiabilidad. Agregando a las respuestas, la fuente de la información y su ultima actualización. Se hace notar, que la fuente de la información no es quién pueda atender una consulta no resulta, ni quien esté disponible en el chat, manteniendo a estos actores anónimos. Y junto con esto, la capacidad del usuario de retroalimentar al sistema, permitiendo ayudar a establecer métricas de vigencia, reales, basadas en las calificaciones de los usuarios, así como proporcionar ayuda a los administradores del sistema, al poner atención a aquellos procesos que requieren realmente una actualización, lo que permite enfocar los esfuerzos.
+    % Modelo de Subscripción personalizada
+    \par Luego, se generará un modelo de subscripción, que permita buscar y seleccionar un proceso de forma individual, más específicamente una instancia a un cierto proceso, ya que los procesos cómo tesis, memorias, funcionan como clases de los objetos individuales, que serían los procesos vigentes cada semestre (ver \cite{ARANCIBIA2021}). 
+    \par Se hace notar que esta búsqueda debe permitir generar modelos de subscripción no solo a procesos globales, sino que de forma más general, a información que sea relevante para el alumno, por ejemplo deadlines, requisitos, consecuencias, entre otros. Permitiendo de este modo, que
+    \par A partir de este proceso de búsqueda, no se debe mostrar las preguntas frecuentes, sino elementos que componen este proceso, y su flujo, de modo que el estudiante, pueda interactuar de forma personalizada con aquellos elementos, que considere que son relevantes para el, y no entregar únicamente una experiencia empaquetada que puede terminar generando información de bajo impacto para el usuario. A estos elementos se les denominó en los objetivos elemento subscriptor.
+    \par Es muy importante que estos elementos sean validados en su mayoría por usuarios, porque tanto su representación como sus desencadenantes, son diferentes en cada caso.
+    \par Así mismo, hay que generar un modelo de notificaciones, que se ajuste a estas necesidades, y que sea lo suficientemente simple como para poder extenderlo sin problemas. Es importante notar, que \textit{Telegram} hay diferentes formas de ``notificar`` a un usuario, o de hacer cierta información presente, se puede realizar mediante nuevos mensajes, se pueden enviar mensajes que queden fijados en la parte superior del chat, así cómo se pueden editar mensajes anteriores, por lo que se puede actualizar el contenido de un mensaje. También, el formato, es muy amplio. Por lo tanto, lo que como un mensaje escrito puede ser mejor par aun caso, puede ser una imagen para otro. Por lo tanto hay que evaluar bien que es lo que está disponible al bot y la vez se ajusta las preferencias de los usuarios.
+    \par Finalmente se debe validar este modelo con usuarios, y entidades relevantes para hacer un ajuste, antes de comenzar con la etapa de implementación. Esta validaciones, debe contemplar todos los aspectos ya mencionados como nuevas funcionalidades, centrándose en la relevancia de cada una para del estudiante. Al mismo tiempo, el agregar nuevas funcionalidades y personalización que dependa de datos del usuario, pude levantar problemas de privacidad que deben ser revisados junto a los encuestados.
+    % Implementación
+    \subsection{Implementación}
+    \par La ultima fase es la implementación de las funcionalidades ya validadas. Este proceso busca integrar estas funcionalidades, tanto al \textit{back-end} como al \textit{front-end}. Por lo tanto nuevamente se requerirá de un alto grado de cuidado para no romper las funcionalidades ya implementadas.
+    % Validación
+    \par Estas \textit{features} deben ser testeadas. Además se incluirá un proceso de validación con los usuarios que incluya demos. Opcionalmente pero no depende del memorista, se plantea la posibilidad de incluir estas funcionalidades en un sistema de producción. Pero esto depende del CADCC y de la disponibilidad de sus miembros.
+    % Documentación y extras.
+    \subsection{Documentación}
+    \par Aunque la documentación no representa un desafío técnico elevado, se quiere destacar su rol, en la extensibilidad de un sistema, por lo que, se requeire tiempo, especial en cada iteración, para realizar una buena documentación del sistema.
+    % Dentro de otros aspectos no fundamentales este sistema incluirá una forma de auditar el tiempo de respuesta, las fuentes de información confiable, identificación y preferencias de los usuarios, así cómo métricas de uso para su mejora continua.
+    
+    \subsection{Tecnologías}
+        Si bien la decisión de qué tecnologías usar, puede verse modificada en un futuro, según los resultados del trabajo, en primera instancia se pretende continuar con el \textit{setup} original del proyecto.\\
+        Dentro de los lenguajes a utilizar se destacan: Python, JavaScript y SQL. Estos están fuertemente ligados a las herramientas que se usan en los distintos aspectos del proyecto.
+        \begin{itemize}
+            \item \textbf{Servidor}: El servidor funciona principalmente en \textit{django}, a través de la librería \textit{django channels} se sincronizan los chats del administrador con el bot. También se pretende integrar \textit{Celeri} para el menejo de proceso asíncronos.
+            \item \textbf{Motor de Base de datos:} La base de datos, inicialmente pensada para preguntas repetitivas y frecuentes, usa \textit{MongoDB}, que como herramienta \textit{NoSQL}, está especializada en este tipo de \textit{requests}. También, puede que sea necesario agregar otro tipo de motores en el transcurso del proyecto, ya que hay varias áreas sobre todo auditoría, en las que el modelo, no se ajusta completamente al enfoque \textit{NoSQL}.
+            \item \textbf{Cache sesión usuario}: Se usa \textit{Redis}, para administrar las conversaciones a través de \textit{Django Channels}.
+            \item \textbf{Pagina Web}: La página web, esta principalmente diseñada en \textit{React}, más algunas librerías para facilitar el desarrollo de componentes visuales. Se destaca, que idealmente esta no se encuentra en el scope del proyecto.
+        \end{itemize}
+        
+
+    % \begin{pauta}
+    % Una descripción general de la solución propuesta: los datos, las técnicas, las tecnologías, las herramientas, los lenguajes, los marcos, etc., que se usarán para intentar lograr los objetivos planteados. Aquí hay que contestar la pregunta: ¿\textit{cómo} vas a lograr los objetivos planteados? Aquí, sí, está muy bien hablar de Javascript, CNNs, Numpy, Django, índices invertidos, árboles wavelet, privacidad diferencial, PageRank, Diffie--Hellman, triangulaciones de Delaunay, CUDA, Postgres, etc.
+    
+    % [1--2 páginas]
+    % \end{pauta}
+\newpage
+
+\bibliographystyle{babplain}
+\bibliography{bibliografia}
+
+\end{document}
+

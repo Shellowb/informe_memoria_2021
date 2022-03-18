@@ -1,0 +1,378 @@
+{
+  "actors": [
+    {
+      "id": "3589ee55-603d-41ee-8bf1-2b2a54498def",
+      "text": "Estudiante DCC",
+      "type": "istar.Actor",
+      "x": 151,
+      "y": 101,
+      "customProperties": {
+        "Description": "I am a Requirements Engineering researcher. You too?",
+        "newProperty": "aksjnakjnsas"
+      },
+      "nodes": [
+        {
+          "id": "fb0ba2ee-cc23-41a3-8bd8-b7cf3ae5f223",
+          "text": "Suscribirse a las fechas de un proceso",
+          "type": "istar.Goal",
+          "x": 190,
+          "y": 209,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "718d0d03-e189-4e40-beba-c9c353fdf80b",
+          "text": "Definir periodicidad",
+          "type": "istar.Goal",
+          "x": 321,
+          "y": 295,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "11775b7b-8caf-4d2a-ae6b-c4c817cd8c1f",
+          "text": "Establecer la periodicidad manualmente",
+          "type": "istar.Task",
+          "x": 536,
+          "y": 546,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "d3597179-2eee-49ec-a469-6931fde930d9",
+          "text": "Establecer la periodicidad a través de opciones",
+          "type": "istar.Task",
+          "x": 523,
+          "y": 409,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "440bd69b-3b6c-435a-b24f-f344d153ea2f",
+          "text": "Establecer la periodicidad automáticamente",
+          "type": "istar.Task",
+          "x": 492,
+          "y": 290,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "3800a1ea-b466-40e2-ae7c-f854e8bc9f16",
+          "text": "Parametrización",
+          "type": "istar.Quality",
+          "x": 164,
+          "y": 600,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "ebdfeef9-2c10-42ea-a089-386f1938d8b7",
+          "text": "Eficiencia",
+          "type": "istar.Quality",
+          "x": 262,
+          "y": 406,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "578c4424-f15c-4936-ba9a-bb406b281971",
+          "text": "Ser Recordado de las fechas del proceso",
+          "type": "istar.Goal",
+          "x": 353,
+          "y": 109,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "471b0d0d-f70d-4a29-976e-8696a531f35e",
+          "text": "Ser Recordado",
+          "type": "istar.Goal",
+          "x": 486,
+          "y": 170,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "afd71bb3-d93e-478f-a8c9-466c45401eec",
+      "text": "Bot",
+      "type": "istar.Agent",
+      "x": 898,
+      "y": 328,
+      "customProperties": {
+        "Description": ""
+      },
+      "nodes": [
+        {
+          "id": "091bb8a1-f8c7-4938-a951-da26d149082b",
+          "text": "Alamcenar preferencias del usuario",
+          "type": "istar.Task",
+          "x": 943,
+          "y": 449,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "e21e4789-17cb-4dfa-903d-f0e6c2dc165c",
+          "text": "Notificar en el plazo establecido",
+          "type": "istar.Task",
+          "x": 997,
+          "y": 328,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    }
+  ],
+  "orphans": [],
+  "dependencies": [
+    {
+      "id": "cab2c912-fc43-470c-9afd-27915aa796f0",
+      "text": "enviar preferencias",
+      "type": "istar.Task",
+      "x": 717,
+      "y": 299,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "440bd69b-3b6c-435a-b24f-f344d153ea2f",
+      "target": "091bb8a1-f8c7-4938-a951-da26d149082b"
+    },
+    {
+      "id": "4ed49641-10ff-478e-98d6-ce3371817816",
+      "text": "enviar preferencias",
+      "type": "istar.Task",
+      "x": 712,
+      "y": 394,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "d3597179-2eee-49ec-a469-6931fde930d9",
+      "target": "091bb8a1-f8c7-4938-a951-da26d149082b"
+    },
+    {
+      "id": "c4710ae9-1516-4c7a-87f8-e7cd520c123d",
+      "text": "enviar preferencias",
+      "type": "istar.Task",
+      "x": 717,
+      "y": 478,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "11775b7b-8caf-4d2a-ae6b-c4c817cd8c1f",
+      "target": "091bb8a1-f8c7-4938-a951-da26d149082b"
+    },
+    {
+      "id": "f6d4df46-6c60-419d-9e97-eb3403b414b5",
+      "text": "ver Notificacion",
+      "type": "istar.Task",
+      "x": 718,
+      "y": 209,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "471b0d0d-f70d-4a29-976e-8696a531f35e",
+      "target": "e21e4789-17cb-4dfa-903d-f0e6c2dc165c"
+    }
+  ],
+  "links": [
+    {
+      "id": "e66515bc-6876-4706-988f-0bb9388ea438",
+      "type": "istar.OrRefinementLink",
+      "source": "718d0d03-e189-4e40-beba-c9c353fdf80b",
+      "target": "fb0ba2ee-cc23-41a3-8bd8-b7cf3ae5f223"
+    },
+    {
+      "id": "fa573131-8d98-4cd4-8b43-bddddd54a296",
+      "type": "istar.QualificationLink",
+      "source": "3800a1ea-b466-40e2-ae7c-f854e8bc9f16",
+      "target": "fb0ba2ee-cc23-41a3-8bd8-b7cf3ae5f223"
+    },
+    {
+      "id": "850c1b1e-1d6b-4dde-8955-9d11badc3531",
+      "type": "istar.QualificationLink",
+      "source": "ebdfeef9-2c10-42ea-a089-386f1938d8b7",
+      "target": "fb0ba2ee-cc23-41a3-8bd8-b7cf3ae5f223"
+    },
+    {
+      "id": "18094599-2be2-4211-ba35-a1f0082be26d",
+      "type": "istar.ContributionLink",
+      "source": "d3597179-2eee-49ec-a469-6931fde930d9",
+      "target": "3800a1ea-b466-40e2-ae7c-f854e8bc9f16",
+      "label": "help"
+    },
+    {
+      "id": "a01c5489-50b0-48f1-a67d-b2138cbd3f7c",
+      "type": "istar.ContributionLink",
+      "source": "d3597179-2eee-49ec-a469-6931fde930d9",
+      "target": "ebdfeef9-2c10-42ea-a089-386f1938d8b7",
+      "label": "help"
+    },
+    {
+      "id": "018abc18-bbcc-4f07-aba7-dbeb964c9422",
+      "type": "istar.ContributionLink",
+      "source": "440bd69b-3b6c-435a-b24f-f344d153ea2f",
+      "target": "ebdfeef9-2c10-42ea-a089-386f1938d8b7",
+      "label": "make"
+    },
+    {
+      "id": "cf0f1c65-bfb4-4d69-8c22-e700a97f7f75",
+      "type": "istar.ContributionLink",
+      "source": "11775b7b-8caf-4d2a-ae6b-c4c817cd8c1f",
+      "target": "3800a1ea-b466-40e2-ae7c-f854e8bc9f16",
+      "label": "make"
+    },
+    {
+      "id": "247de8cd-4309-44c2-82a2-22fb97377b07",
+      "type": "istar.ContributionLink",
+      "source": "440bd69b-3b6c-435a-b24f-f344d153ea2f",
+      "target": "3800a1ea-b466-40e2-ae7c-f854e8bc9f16",
+      "label": "break"
+    },
+    {
+      "id": "c55e6366-8de2-4c10-90e1-12c873f0184b",
+      "type": "istar.ContributionLink",
+      "source": "11775b7b-8caf-4d2a-ae6b-c4c817cd8c1f",
+      "target": "ebdfeef9-2c10-42ea-a089-386f1938d8b7",
+      "label": "break"
+    },
+    {
+      "id": "f18c1cd4-349c-4012-b6bb-1ef276707a14",
+      "type": "istar.OrRefinementLink",
+      "source": "11775b7b-8caf-4d2a-ae6b-c4c817cd8c1f",
+      "target": "718d0d03-e189-4e40-beba-c9c353fdf80b"
+    },
+    {
+      "id": "e5d6fce9-2561-4691-ac78-89c526df315c",
+      "type": "istar.OrRefinementLink",
+      "source": "d3597179-2eee-49ec-a469-6931fde930d9",
+      "target": "718d0d03-e189-4e40-beba-c9c353fdf80b"
+    },
+    {
+      "id": "f9d28efb-9fd3-4aba-aa14-3368b75392fb",
+      "type": "istar.OrRefinementLink",
+      "source": "440bd69b-3b6c-435a-b24f-f344d153ea2f",
+      "target": "718d0d03-e189-4e40-beba-c9c353fdf80b"
+    },
+    {
+      "id": "a34052df-3de6-40ff-8fec-c06ae469d225",
+      "type": "istar.DependencyLink",
+      "source": "440bd69b-3b6c-435a-b24f-f344d153ea2f",
+      "target": "cab2c912-fc43-470c-9afd-27915aa796f0"
+    },
+    {
+      "id": "47085c94-a7c8-4032-a802-83504905ceb5",
+      "type": "istar.DependencyLink",
+      "source": "cab2c912-fc43-470c-9afd-27915aa796f0",
+      "target": "091bb8a1-f8c7-4938-a951-da26d149082b"
+    },
+    {
+      "id": "eef72dde-fba9-4962-8089-6014f2cc95cf",
+      "type": "istar.DependencyLink",
+      "source": "d3597179-2eee-49ec-a469-6931fde930d9",
+      "target": "4ed49641-10ff-478e-98d6-ce3371817816"
+    },
+    {
+      "id": "57d17377-de22-4565-8219-aa9c17bd37ab",
+      "type": "istar.DependencyLink",
+      "source": "4ed49641-10ff-478e-98d6-ce3371817816",
+      "target": "091bb8a1-f8c7-4938-a951-da26d149082b"
+    },
+    {
+      "id": "25a7e25f-a7bf-4d1c-9876-35f70b554dc3",
+      "type": "istar.DependencyLink",
+      "source": "11775b7b-8caf-4d2a-ae6b-c4c817cd8c1f",
+      "target": "c4710ae9-1516-4c7a-87f8-e7cd520c123d"
+    },
+    {
+      "id": "b3457966-88b5-4832-b823-380c9e23bf41",
+      "type": "istar.DependencyLink",
+      "source": "c4710ae9-1516-4c7a-87f8-e7cd520c123d",
+      "target": "091bb8a1-f8c7-4938-a951-da26d149082b"
+    },
+    {
+      "id": "528b6075-0972-41ad-9914-f28b42d02b4c",
+      "type": "istar.AndRefinementLink",
+      "source": "fb0ba2ee-cc23-41a3-8bd8-b7cf3ae5f223",
+      "target": "578c4424-f15c-4936-ba9a-bb406b281971"
+    },
+    {
+      "id": "8ffbdaf5-60ba-4829-9e9b-0e46ea68f06f",
+      "type": "istar.DependencyLink",
+      "source": "471b0d0d-f70d-4a29-976e-8696a531f35e",
+      "target": "f6d4df46-6c60-419d-9e97-eb3403b414b5"
+    },
+    {
+      "id": "76171597-da7d-4258-95db-9d4fa2835778",
+      "type": "istar.DependencyLink",
+      "source": "f6d4df46-6c60-419d-9e97-eb3403b414b5",
+      "target": "e21e4789-17cb-4dfa-903d-f0e6c2dc165c"
+    },
+    {
+      "id": "7302a9e7-b95b-4fb2-9388-c6aebe13a883",
+      "type": "istar.AndRefinementLink",
+      "source": "471b0d0d-f70d-4a29-976e-8696a531f35e",
+      "target": "578c4424-f15c-4936-ba9a-bb406b281971"
+    }
+  ],
+  "display": {
+    "3589ee55-603d-41ee-8bf1-2b2a54498def": {
+      "backgroundColor": "#DFFA7D"
+    },
+    "fb0ba2ee-cc23-41a3-8bd8-b7cf3ae5f223": {
+      "width": 116.60000610351562,
+      "height": 62.80000305175781
+    },
+    "11775b7b-8caf-4d2a-ae6b-c4c817cd8c1f": {
+      "width": 102.60000610351562,
+      "height": 58.80000305175781
+    },
+    "d3597179-2eee-49ec-a469-6931fde930d9": {
+      "width": 106.60000610351562,
+      "height": 66.80000305175781
+    },
+    "440bd69b-3b6c-435a-b24f-f344d153ea2f": {
+      "width": 136.60000610351562,
+      "height": 70.80000305175781
+    },
+    "3800a1ea-b466-40e2-ae7c-f854e8bc9f16": {
+      "width": 112.63394927978516,
+      "height": 54.80567932128906
+    },
+    "578c4424-f15c-4936-ba9a-bb406b281971": {
+      "width": 103.60000610351562,
+      "height": 66.30000305175781
+    },
+    "091bb8a1-f8c7-4938-a951-da26d149082b": {
+      "width": 110.60000610351562,
+      "height": 49.80000305175781
+    },
+    "e21e4789-17cb-4dfa-903d-f0e6c2dc165c": {
+      "width": 107.60000610351562,
+      "height": 46.80000305175781
+    }
+  },
+  "tool": "pistar.2.0.0",
+  "istar": "2.0",
+  "saveDate": "Mon, 02 Aug 2021 01:47:15 GMT",
+  "diagram": {
+    "width": 2000,
+    "height": 1300,
+    "name": "Recordatorios",
+    "customProperties": {
+      "Description": "Refiere a los recordatorios a los que se puede suscribir relativos a las fechas de un proceso."
+    }
+  }
+}
