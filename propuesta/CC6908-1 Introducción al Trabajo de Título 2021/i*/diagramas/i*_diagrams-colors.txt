@@ -1,0 +1,4 @@
+goals 		= #CCFACD
+agents		= #FAC667
+qualities 	= #75C6FF
+tasks 		= #BDBDBD
