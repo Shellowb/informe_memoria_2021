@@ -46,6 +46,10 @@
 %% Agregar palabra para anexos
 \RequirePackage[titletoc]{appendix}
 
+
+
+
+
 \if@en
 	\RequirePackage{babel}
 \else
