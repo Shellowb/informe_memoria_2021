@@ -2,19 +2,20 @@
 \section{Estado del Arte}
     \par Para el desarrollo de este trabajo se hizo una investigación sobre los sistemas que solucionan problemas similares y a que objetivos responden. Al mismo tiempo como abordar el hecho de que el usuario es parte fundamental del flujo del sistema tanto en su funcionamiento como imponiendo restricciones dinámicas sobre el mismo, las que responderían a preferencias o valores de cada usuario. Por este motivo los temas abordados a continuación son \textit{\acrfull{UCD}}, \textit{human in the loop}, \textit{information systems} y \textit{chatbots}.
     
-    \subsection{User centered desing - privacy, cutomization and confiability}
-    \par Este es un sistema que indudablemente se basa en el usuario y sus preferencias, es por esta razón que para que el desarrollo sea exitoso no basta con que se desarrolle de la manera correcta y asumiendo buenas prácticas, sino que debe hacerse en torno al usuario y rescatando no sólo su input \cite{Karat1997}, sino sus objetivos y valores. Dentro de las maneras de enfocar un desarrollo centrado en el usuario encontramos 3 alternativas la especialista, generalista y mixto \cite{Fox2008}.
+    \subsection{Requisitos diseño centrado en el usuario}
+    \par Este es un sistema que indudablemente se basa en el usuario y sus preferencias, es por esta razón que para que el desarrollo sea exitoso no basta con que se desarrolle de la manera correcta y asumiendo buenas prácticas, sino que debe hacerse en torno al usuario y rescatando no solo su input \cite{Karat1997}, sino sus objetivos y valores. Dentro de las maneras de enfocar un desarrollo centrado en el usuario encontramos 3 alternativas la especialista, generalista y mixto \cite{Fox2008}.
     \par la manera especialista hace referencia a que hay 3 actores encargados del proceso, los usuarios, los encargados de \acrshort{UCD} y el resto del equipo de desarrollo. Por otro lado, la generalista asume dos roles: el de usuario y el de desarrollador encargado de esta área.
     \par En esta línea de \textit{\acrlong{UCD}}, el diseño propiamente tal, se entiende como un proceso, en el que debe estar involucrado el usuario final, de forma constante.
     De modo que la personalización llega a ser "una pieza fundamental del diseño exitoso es aterrizar el desarrollo de \textit{features} y herramientas sobre el valor del usuario final" \cite{Kramer2000}.
     \par De aquí se obtiene que el sistema debería ser personalizable, y rescatar lo que sea valorado por los usuarios. Dada la naturaleza del proyecto, se decide adoptar un enfoque generalista.
     
-    \subsection{Information Sistem and Human in the loop}
+    \subsection{El usuario como input del sistema}
     \par Al ser un sistema que depende del usuario para determinar el curso de acción, el humano en este sistema no solo está en ciertos momentos críticos del flujo, sino que es el centro del flujo de información, modelos como este han sido validados con buenos resultados \cite{Smith2018} recientemente.
     \par Los sistemas de información asociados a chatbots, generalmente buscan la integración de información, este proceso es decir mostrarle al usuario una gran variedad de información de diferentes fuentes a través de una vista unificada viene asociado a varias dificultades técnicas y teóricas \cite{Li2017}.
     \par En este sentido, se propone que los sistemas de información que dependen de un humano son altamente complejos, porque los humanos, en este caso usuarios no solo son observadores, sino que tienen la capacidad de incidir en el ambiente no solo reaccionar al ambiente \cite{McBride2021}, sería iluso desarrollar un sistema para las personas sin considerar los objetivos de ellas de forma explícita en el diseño del sistema.
     \par Estos descubrimientos e investigaciones ponen varias restricciones en cuanto al desarrollo de un sistema que depende los usuarios para funcionar y que al mismo tiempo está centrado en el usuario. Pero las podemos condensar en al menos 2: El diseño del sistema debe considerar de forma explícita los objetivos del usuario en cada interacción y debe integrar la información.
-    \subsection{Chabots}
+
+    \subsection{Otras aplicaciones de los chatbots en el ámbito académico}
     \par Los chatbots se utilizan desde hace varios años para variados y diversos fines, en múltiples áreas. En particular ahora los abordaremos desde la esfera académica, centrándonos específicamente en instituciones de educación superior.
     En estas se utilizan principalmente como un medio de apoyo al proceso de aprendizaje, como soporte para procesos universitarios, como ayuda para la gestión académica y cómo un sistema de consulta que responde a dudas de diversos entes de estas instituciones.
     
@@ -42,7 +43,7 @@
     \par Como un sistema de consulta se han desarrollado sistemas de preguntas frecuentes, algunos ejemplos son el sistema de Mesa de ayuda del DCC \cite{ARANCIBIA2021} y un trabajo de la \textit{Manipal University} en la India \cite{Ranoliya2017}.
     \par Aunque ambos son similares, responden a necesidades completamente distintas, el sistema del DCC es un proyecto centrado en el usuario, mientras que el trabajo de la India tiene un foco en la performance y el uso de IA.
     
-    \subsection{Análisis de las soluciones actuales}
+    \subsection{Análisis de las aplicaciones actuales}
     \par Como se puede observar los bots cumplen variadas funciones dentro de la vida universitaria a través del mundo, apoyando a toda la comunidad escolar, tanto tutores, como funcionarios y alumnos, haciendo más accesibles, disponibles y eficientes diversos servicios, incluso apoyando procesos de aprendizaje virtual y presencial.
     \par A pesar de la gran diversidad de funcionalidades que están presentes en estos sistemas, se logra rescatar que en la mayoría de los casos se diseña basándose en un modelo de inputs, procesamiento y respuestas. En la mayoría de los casos a pesar de ser desarrollos que buscan acercar o facilitar la vida de sus usuarios, suelen tomar un enfoque técnico y centrarse en aspectos como tener una \textit{\acrshort{effectiveGUI}}, son desarrollos que en general carecen de un modelo que integre al usuario directamente, y se enfocan en solucionar los problemas de manera analítica o teórica. Esto podría ser una enorme dificultad para el proyecto e iría en contra de los descubrimientos en el área de \textit{\acrlong{UCD}}.
     \par Por estas razones se opta por tomar los buenos resultados funcionales de los chatbots, pero agregarles de alguna forma las preferencias de los usuarios de forma explícita en el diseño de los nuevos modelos de interacción.
@@ -52,7 +53,7 @@
     \par Las bases del lenguaje se pueden encontrar en la guía del lenguaje \cite{Dalpiaz2016} y las imágenes en la wiki del lenguaje \cite{No-mention2011}.
     \par esto se hace a través de la sintaxis de este lenguaje que detallaremos brevemente a continuación:
     \begin{itemize}
-        \item Objetivos: los objetivos o \textit{Goals} por su nombre en inglés, son en palabras simples un estado que desea alcanzar el usuario relativo a algo. Por ejemplo: `` Tener los pasajes de avión comprados``
+        \item Objetivos: los objetivos o \textit{Goals} por su nombre en inglés, son en palabras simples un estado que desea alcanzar, por el usuario en relación a algo. Por ejemplo: \guillemotleft Tener los pasajes de avión comprados \guillemotright
         \begin{figure}[H]
             \centering
             \includegraphics{media/imagenes/i_star/sintaxis/goal.jpg}
@@ -60,21 +61,21 @@
             % \label{fig:my_label}
         \end{figure}
 
-        \item Tareas: las tareas (\textit{Task}) son acciones que el usuario puede realizar para lograr su objetivo. Ejemplo: ``Buscar pasajes de avión``, `` Comprar pasajes en la aerolínea``.
+        \item Tareas: las tareas (\textit{Task}) son acciones que el usuario puede realizar para lograr su objetivo. Ejemplo: \guillemotleft Buscar pasajes de avión \guillemotright, \guillemotleft Comprar pasajes en la aerolínea \guillemotright.
                 \begin{figure}[H]
             \centering
             \includegraphics{media/imagenes/i_star/sintaxis/task.jpg}
             \caption{Tarea \gls{i*}}
             % \label{fig:my_label}
         \end{figure}
-        \item Cualidades: o \textit{Qualities} son maneras o elementos de valor que se quiere preservar u obviar al completar un objetivo. Ejemplo: ``Rápido``, en esta serie de ejemplo la frase completa se entendería como ``Tener los pasajes de avión comprados rápido`` o de manera ``rápida``.
+        \item Cualidades: o \textit{Qualities} son maneras o elementos de valor que se quiere preservar u obviar al completar un objetivo. Ejemplo: \guillemotleft Rápido\guillemotright, en esta serie de ejemplo la frase completa se entendería como \guillemotleft Tener los pasajes de avión comprados rápido\guillemotright o de manera \guillemotleft rápida \guillemotright.
                 \begin{figure}[h]
             \centering
             \includegraphics{media/imagenes/i_star/sintaxis/softgoal.jpg}
             \caption{Cualidad \gls{i*}, antes \textit{softgoal} en i* 1.0}
             % \label{fig:my_label}
         \end{figure}
-        \item Recursos: Los recursos son elementos ligados a las tareas, como una ``tarjeta de crédito``, en esa línea se podría ``comprar los pases en la aerolínea con una tarjeta de crédito``
+        \item Recursos: Los recursos son elementos ligados a las tareas, como una \guillemotleft tarjeta de crédito\guillemotleft  en esa línea se podría \guillemotleft comprar los pases en la aerolínea con una tarjeta de crédito\guillemotleft.
                 \begin{figure}[h]
             \centering
             \includegraphics{media/imagenes/i_star/sintaxis/resource.jpg}
@@ -82,7 +83,7 @@
             % \label{fig:my_label}
         \end{figure}
         
-        \item Actores: Los actores son elementos principales del diagrama, realiza acciones, dispone los recursos y tiene objetivos. Pueden ser de tres tipos: un tipo general del cuando no se desea especificar, un agente que representa una instancia particular de un actor: como ``Juan`` o el ``Bot`` y un rol, que viene a ser una categoría o clase como ``Estudiante``. Las \textit{boundaries} o límites relativos a un actor determinan que elementos le ``pertenecen``
+        \item Actores: Los actores son elementos principales del diagrama, realiza acciones, dispone los recursos y tiene objetivos. Pueden ser de tres tipos: un tipo general del cuando no se desea especificar, un agente que representa una instancia particular de un actor: como \guillemotleft Juan\guillemotleft o el \guillemotleft Bot\guillemotleft y un rol, que viene a ser una categoría o clase como \guillemotleft Estudiante\guillemotleft  Las \textit{boundaries} o límites relativos a un actor determinan que elementos le \guillemotleft pertenecen\guillemotleft.
         \begin{figure}[h!]
             \centering
             \includegraphics[scale=0.4]{media/imagenes/i_star/sintaxis/role.jpg}

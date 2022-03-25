@@ -351,12 +351,18 @@
 \RequirePackage{import} % to import things ?
 \RequirePackage{hyperref} % 
 \RequirePackage{graphicx} % to use images
-\RequirePackage{float} % to float (move, center) images
+\RequirePackage{newfloat} % to float (move, center) images
 \RequirePackage{fontspec} % For use a custom font Use only with XeTex or LuaTex
 \RequirePackage{minted}
+\RequirePackage[dvipsnames]{xcolor}
+
+
+\definecolor{bg}{rgb}{0.95, 0.95, 0.95}
+\definecolor{bg2}{RGB}{200, 200, 200}
 
 
 \renewcommand{\lstlistingname}{Sección de Código}
+\SetupFloatingEnvironment{listing}{name=Codigo}
 
 \renewcommand{\theFancyVerbLine}{
   \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
@@ -371,16 +377,21 @@
 %	SET code style for the document
 \setminted[python]{
   mathescape,
+  breaklines,
+  breakanywhere,
   linenos,
   numbersep=5pt,
-  gobble=2,
+  autogobble=2,
   frame=leftline,
   framesep=2mm,
+  fontsize = \small,
   bgcolor=bg}
 
 %	set a custom style
   \newminted{py}{
     mathescape,
+	breaklines,
+	breakanywhere,
     linenos,
     numbersep=5pt,
     gobble=2,

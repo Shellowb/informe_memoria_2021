@@ -8,5 +8,5 @@
 # LUALATEX
 lualatex -shell-escape main.tex
 makeglossaries main
-bibtex main
+biber main
 lualatex -shell-escape main.tex
