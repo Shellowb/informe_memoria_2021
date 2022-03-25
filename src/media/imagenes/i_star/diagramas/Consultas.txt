@@ -1,0 +1,232 @@
+{
+  "actors": [
+    {
+      "id": "e2aec9cd-ff0b-48ca-84d7-7d2ef66d4434",
+      "text": "Bot",
+      "type": "istar.Agent",
+      "x": 682,
+      "y": 330,
+      "customProperties": {
+        "Description": ""
+      },
+      "nodes": [
+        {
+          "id": "0a5a16e0-5278-483b-80da-ef7fb8f02838",
+          "text": "Entregar Infromación",
+          "type": "istar.Task",
+          "x": 743,
+          "y": 407,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "c2b2ae07-5a55-4d10-8242-d14c9d8ba59c",
+      "text": "Estudiante DCC",
+      "type": "istar.Role",
+      "x": 173,
+      "y": 303,
+      "customProperties": {
+        "Description": ""
+      },
+      "nodes": [
+        {
+          "id": "347bc04d-07d0-4cf5-a931-16ff45e51c3f",
+          "text": "Contenido Definido",
+          "type": "istar.Goal",
+          "x": 350,
+          "y": 408,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "b14d8342-cfee-4489-9cdc-f9288bbfdf25",
+          "text": "Información Obtenida",
+          "type": "istar.Goal",
+          "x": 238,
+          "y": 474,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "76b8692e-41ad-46eb-8b6d-523e59124d0e",
+          "text": "Obtener información del proceso",
+          "type": "istar.Goal",
+          "x": 243,
+          "y": 322.5,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+          "text": "Solicitar Contenido",
+          "type": "istar.Task",
+          "x": 287,
+          "y": 593,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+          "text": "Consultar Contenidos Disponibles",
+          "type": "istar.Task",
+          "x": 406,
+          "y": 483,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    }
+  ],
+  "orphans": [],
+  "dependencies": [
+    {
+      "id": "48e01e81-78ee-4460-b2ff-6c45b0ae3f6d",
+      "text": "Responder consulta",
+      "type": "istar.Task",
+      "x": 553,
+      "y": 415,
+      "customProperties": {
+        "Description": "asdasd"
+      },
+      "source": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "d86a3a67-c3cc-4d50-b79d-f3c5b57f43a1",
+      "text": "Contenidos Disponibles",
+      "type": "istar.Resource",
+      "x": 548,
+      "y": 531,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "bf811416-e628-41cb-976f-5b290c3b5c6e",
+      "text": "Procesar consulta",
+      "type": "istar.Task",
+      "x": 569,
+      "y": 603,
+      "customProperties": {
+        "Description": ""
+      },
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    }
+  ],
+  "links": [
+    {
+      "id": "04186655-c8b9-48c4-87aa-d2019f5b942b",
+      "type": "istar.DependencyLink",
+      "source": "bf811416-e628-41cb-976f-5b290c3b5c6e",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "2ba47fca-c892-46dc-b2cb-75cd4ad0d565",
+      "type": "istar.DependencyLink",
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "bf811416-e628-41cb-976f-5b290c3b5c6e"
+    },
+    {
+      "id": "dd2e625b-39d0-42b9-9fcf-f77d97d8b042",
+      "type": "istar.DependencyLink",
+      "source": "d86a3a67-c3cc-4d50-b79d-f3c5b57f43a1",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "0300099d-2772-43b4-8303-a18aebf4bd93",
+      "type": "istar.DependencyLink",
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "d86a3a67-c3cc-4d50-b79d-f3c5b57f43a1"
+    },
+    {
+      "id": "ee8fa3f4-f22e-4e5e-88ce-865d1954a4e2",
+      "type": "istar.DependencyLink",
+      "source": "48e01e81-78ee-4460-b2ff-6c45b0ae3f6d",
+      "target": "0a5a16e0-5278-483b-80da-ef7fb8f02838"
+    },
+    {
+      "id": "dc3c9273-4c0f-47ba-a15d-9776c14bd9a4",
+      "type": "istar.DependencyLink",
+      "source": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+      "target": "48e01e81-78ee-4460-b2ff-6c45b0ae3f6d"
+    },
+    {
+      "id": "98b81c36-e06f-444d-8f5a-f3d7dd785906",
+      "type": "istar.AndRefinementLink",
+      "source": "347bc04d-07d0-4cf5-a931-16ff45e51c3f",
+      "target": "76b8692e-41ad-46eb-8b6d-523e59124d0e"
+    },
+    {
+      "id": "f1acd165-0c65-48e3-8fd1-f40b078697f7",
+      "type": "istar.AndRefinementLink",
+      "source": "b14d8342-cfee-4489-9cdc-f9288bbfdf25",
+      "target": "76b8692e-41ad-46eb-8b6d-523e59124d0e"
+    },
+    {
+      "id": "2d7f7a85-78f9-4c17-b47e-df50244b1611",
+      "type": "istar.OrRefinementLink",
+      "source": "b3f75da4-5aa6-44c7-a33f-b0507978069c",
+      "target": "b14d8342-cfee-4489-9cdc-f9288bbfdf25"
+    },
+    {
+      "id": "ea3f7e38-473d-457f-8234-e6e511c6abfc",
+      "type": "istar.OrRefinementLink",
+      "source": "1de186c3-c3d4-4821-b8a2-8d3438462636",
+      "target": "347bc04d-07d0-4cf5-a931-16ff45e51c3f"
+    }
+  ],
+  "display": {
+    "e2aec9cd-ff0b-48ca-84d7-7d2ef66d4434": {
+      "backgroundColor": "#FAC667"
+    },
+    "0a5a16e0-5278-483b-80da-ef7fb8f02838": {
+      "backgroundColor": "#BDBDBD"
+    },
+    "c2b2ae07-5a55-4d10-8242-d14c9d8ba59c": {
+      "backgroundColor": "#FAC667"
+    },
+    "76b8692e-41ad-46eb-8b6d-523e59124d0e": {
+      "width": 100.80000305175781,
+      "height": 53.30000305175781
+    },
+    "b3f75da4-5aa6-44c7-a33f-b0507978069c": {
+      "backgroundColor": "#BDBDBD"
+    },
+    "1de186c3-c3d4-4821-b8a2-8d3438462636": {
+      "backgroundColor": "#BDBDBD",
+      "width": 110.80000305175781,
+      "height": 52.80000305175781
+    },
+    "48e01e81-78ee-4460-b2ff-6c45b0ae3f6d": {
+      "backgroundColor": "#BDBDBD"
+    },
+    "d86a3a67-c3cc-4d50-b79d-f3c5b57f43a1": {
+      "backgroundColor": "#F9FAAD"
+    },
+    "bf811416-e628-41cb-976f-5b290c3b5c6e": {
+      "backgroundColor": "#BDBDBD"
+    }
+  },
+  "tool": "pistar.2.1.0",
+  "istar": "2.0",
+  "saveDate": "Fri, 18 Mar 2022 22:10:01 GMT",
+  "diagram": {
+    "width": 2123,
+    "height": 1300,
+    "name": "Consultas",
+    "customProperties": {
+      "Description": ""
+    }
+  }
+}

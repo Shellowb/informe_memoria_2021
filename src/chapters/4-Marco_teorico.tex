@@ -1,3 +1,4 @@
+\chapter{Marco Teórico}\label{mt}
 \section{Estado del Arte}
     \par Para el desarrollo de este trabajo se hizo una investigación sobre los sistemas que solucionan problemas similares y a que objetivos responden. Al mismo tiempo como abordar el hecho de que el usuario es parte fundamental del flujo del sistema tanto en su funcionamiento como imponiendo restricciones dinámicas sobre el mismo, las que responderían a preferencias o valores de cada usuario. Por este motivo los temas abordados a continuación son \textit{\acrfull{UCD}}, \textit{human in the loop}, \textit{information systems} y \textit{chatbots}.
     
@@ -45,3 +46,75 @@
     \par Como se puede observar los bots cumplen variadas funciones dentro de la vida universitaria a través del mundo, apoyando a toda la comunidad escolar, tanto tutores, como funcionarios y alumnos, haciendo más accesibles, disponibles y eficientes diversos servicios, incluso apoyando procesos de aprendizaje virtual y presencial.
     \par A pesar de la gran diversidad de funcionalidades que están presentes en estos sistemas, se logra rescatar que en la mayoría de los casos se diseña basándose en un modelo de inputs, procesamiento y respuestas. En la mayoría de los casos a pesar de ser desarrollos que buscan acercar o facilitar la vida de sus usuarios, suelen tomar un enfoque técnico y centrarse en aspectos como tener una \textit{\acrshort{effectiveGUI}}, son desarrollos que en general carecen de un modelo que integre al usuario directamente, y se enfocan en solucionar los problemas de manera analítica o teórica. Esto podría ser una enorme dificultad para el proyecto e iría en contra de los descubrimientos en el área de \textit{\acrlong{UCD}}.
     \par Por estas razones se opta por tomar los buenos resultados funcionales de los chatbots, pero agregarles de alguna forma las preferencias de los usuarios de forma explícita en el diseño de los nuevos modelos de interacción.
+
+\section{Notacion i*}
+    \par La notación \gls{i*}, se usará como se explicó anteriormente para explicar no solo la interacción del usuario con el sistema, sino también que persiguen los mismos al realizar dicha interacción.
+    \par Las bases del lenguaje se pueden encontrar en la guía del lenguaje \cite{Dalpiaz2016} y las imágenes en la wiki del lenguaje \cite{No-mention2011}.
+    \par esto se hace a través de la sintaxis de este lenguaje que detallaremos brevemente a continuación:
+    \begin{itemize}
+        \item Objetivos: los objetivos o \textit{Goals} por su nombre en inglés, son en palabras simples un estado que desea alcanzar el usuario relativo a algo. Por ejemplo: `` Tener los pasajes de avión comprados``
+        \begin{figure}[H]
+            \centering
+            \includegraphics{media/imagenes/i_star/sintaxis/goal.jpg}
+            \caption{Objetivo \gls{i*}}
+            % \label{fig:my_label}
+        \end{figure}
+
+        \item Tareas: las tareas (\textit{Task}) son acciones que el usuario puede realizar para lograr su objetivo. Ejemplo: ``Buscar pasajes de avión``, `` Comprar pasajes en la aerolínea``.
+                \begin{figure}[H]
+            \centering
+            \includegraphics{media/imagenes/i_star/sintaxis/task.jpg}
+            \caption{Tarea \gls{i*}}
+            % \label{fig:my_label}
+        \end{figure}
+        \item Cualidades: o \textit{Qualities} son maneras o elementos de valor que se quiere preservar u obviar al completar un objetivo. Ejemplo: ``Rápido``, en esta serie de ejemplo la frase completa se entendería como ``Tener los pasajes de avión comprados rápido`` o de manera ``rápida``.
+                \begin{figure}[h]
+            \centering
+            \includegraphics{media/imagenes/i_star/sintaxis/softgoal.jpg}
+            \caption{Cualidad \gls{i*}, antes \textit{softgoal} en i* 1.0}
+            % \label{fig:my_label}
+        \end{figure}
+        \item Recursos: Los recursos son elementos ligados a las tareas, como una ``tarjeta de crédito``, en esa línea se podría ``comprar los pases en la aerolínea con una tarjeta de crédito``
+                \begin{figure}[h]
+            \centering
+            \includegraphics{media/imagenes/i_star/sintaxis/resource.jpg}
+            \caption{Recurso \gls{i*}}
+            % \label{fig:my_label}
+        \end{figure}
+        
+        \item Actores: Los actores son elementos principales del diagrama, realiza acciones, dispone los recursos y tiene objetivos. Pueden ser de tres tipos: un tipo general del cuando no se desea especificar, un agente que representa una instancia particular de un actor: como ``Juan`` o el ``Bot`` y un rol, que viene a ser una categoría o clase como ``Estudiante``. Las \textit{boundaries} o límites relativos a un actor determinan que elementos le ``pertenecen``
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[scale=0.4]{media/imagenes/i_star/sintaxis/role.jpg}
+            \includegraphics[scale=0.4]{media/imagenes/i_star/sintaxis/agent.jpg}
+            \includegraphics[scale=0.4]{media/imagenes/i_star/sintaxis/actor.jpg}
+            \includegraphics[scale=0.4]{media/imagenes/i_star/sintaxis/actorboundary.jpg}
+            \caption{Actores \gls{i*}}
+            % \label{fig:my_label}
+        \end{figure}
+        \item Enlaces: o \textit{Links} son lo que representa las relaciones entre los diferentes elementos del sistema, pueden representar dependencias, contribuciones, especificaciones o incluso notar una contribución. En el caso de este trabajo se usan principalmente 3 tipos de enlaces:
+        \begin{itemize}
+            \item Dependencias: Se indican con una letra D y expresan que el elemento a la izquierda de la dependencia, depende del elemento a la derecha, de manera un poco simplista.
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[scale=0.6]{media/imagenes/i_star/sintaxis/dependencylink.jpg}
+                \caption{Dependencia \gls{i*}}
+                % \label{fig:my_label}
+            \end{figure}
+            \item Contribuciones: Indican que cierto elemento contribuye a una Cualidad, puede ser de 4 formas, satisfaciendo completamente lo que se nota con \textit{make} sobre el enlace, Imposibilitando su realización lo que se denota con \textit{break}, o ayudando un poco o debilitando un poco lo que se denota con \textit{help} y \textit{hurt} respectivamente.
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[scale=0.6]{media/imagenes/i_star/sintaxis/contribuitonlinks.jpg}
+                \caption{Contribuciones \gls{i*}}
+                % \label{fig:my_label}
+            \end{figure}
+            \item Refinamiento: Expresan que un objetivo o tarea tiene otros elementos que lo definen. Pueden ser O (\textit{OR}) o Y (\textit{AND}), lo que determinan es que para que el objetivo se satisfaga se debe satisfacer a su vez todos los elementos que lo refinan (\textit{AND}) o alguno de ellos (\textit{OR}).
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[scale=0.6]{media/imagenes/i_star/sintaxis/decomposition.jpg}
+                \includegraphics[scale=0.6]{media/imagenes/i_star/sintaxis/meansendslink.jpg}
+                \caption{Refinamiento \gls{i*}}
+                % \label{fig:my_label}
+            \end{figure}
+        \end{itemize}
+    \end{itemize}

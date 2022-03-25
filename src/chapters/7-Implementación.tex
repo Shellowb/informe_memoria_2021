@@ -1,0 +1,80 @@
+\chapter{Implementación}
+
+\section{Reestructuración}
+
+    El código existente para el bot contenía varios problemas de diseño que hacían compleja su extensibilidad y se pueden revisar detalladamente en la sección de trabajo previo.
+
+    \par Para solucionar estos problemas primero se extrajeron las funcionalidades clave del bot: Obtener información desde la base de datos, recibir request, procesar request y enviar mensajes. La extracción de información, la recepción y envío de mensajes en sí no presentaba mayores problemas de diseño. 
+
+    \subsection{Procesar request}
+
+    \subsubsection{De if a Parser}
+    
+        \par Cómo se vio en la sección de trabajo previo, la API de telegram permite varias formas de comunicación. De ellas se utilizan los websockets. A partir de aquí, los bots pueden recibir todos los mensajes enviados por el usuario, sin embargo, telegram permite agrupar los mensajes en más o menos 4 modalidades: primero texto, archivos o media adjunta, comandos y los keyboards.
+
+        \par En el diseño anterior, como se explicó, se seleccionaron principalmente una manera de comunicación  a través de inline\_keyboards. (sección anterior: En este tipo de comunicación se presentan al usuario una serie de botones que el puede apretar y a partir de los se envia un mensaje al servidor, cuando este es procesado se envía la respuesta al usuario de manera asincrona). Para poder desarrollar las nuevas features, se añadieron comandos, en miras tambien de procesar texto. Se amplió el diseño para pasar de una decisión condicional a un parsing con double dispatch.
+
+        \par \textbf{Sistema de procesamiento anterior}
+        \begin{lstlisting}[
+            language=Python, 
+            caption=Ejemplo de fixture para el proceso de postulación a becas, 
+            label={lst:ejemplo-fixture}
+            framexleftmargin=5mm]
+
+            def message_processing(self, t_chat, message, label=None, question=None ):
+                messages = []
+                if label is None:
+                    if message == '/start':
+                    messages = [ {"text": 'Hola ...',
+                     "keyboard": {}},...]
+                    elif message == '/preguntasFrecuentes': ...
+                    elif message == '/asistente': ... 
+                Else: ...
+                    elif label == 'Process': ...
+                    elif label == 'Category': ...
+                    elif label == 'Question': ...
+                    elif label == 'Helper':  ...
+                
+                for msg in messages:
+                    self.send_message(msg['text'],
+                     t_chat["id"], msg['keyboard'])
+            
+            
+        \end{lstlisting}
+
+
+
+
+
+
+        Nuevo sistema de procesamiento:
+
+        \begin{lstlisting}
+            def post(self, request: AsgiRequest, *args, **kwargs):
+            update = request.body
+            parser.decode_update(update)
+            return JsonResponse({"ok": "POST request processed"})
+        
+            # Parser
+            def decode_update(self, update: bytes):
+                    # Se detecta que el update es un mensaje
+                    if update.match(message-regex) :
+                    return self.parse_expression(message)
+                    # Se detecta que el update es una call_bacK_query
+                    elif update.match(call_bacK_query-regex):
+                    self.parse_expression(label, chat_id)
+                    # No see detecta que es el update
+                    else:
+                        return Updates.UpdateProccesingResult()
+        
+        \end{lstlisting}
+
+
+
+
+    Cómo se puede apreciar en este nuevo sistema, el parser se hace cargo de determinar que tipo de update o actualización fue recibida desde telegram y a partir de esa detección se pasa la expresión recibida a un handler, este determina que acción debe realizarse y luedo llama a la instancia determinada de la acción para que se procese la request. Este nuevo modelo es util principalmente por 5 razones.
+    Mantiene la integridad del procesamiento sin importar si el tipo mensaje de telegram es conocido o no.
+    Separa el parsing de la estructura de la api de Telegram del procesamiento de la acción requerida por el usuario en el sistema. Dualidad Parser-Handler.
+    Permite escalar de forma ordenada el código para recibir muchas nuevas funcionalidades siguiendo un diseño estándar de procesamiento. Esto porque separa la identificación de la acción de su código en particular, estandariza el llamado de las acciones y permite reutilizar patrones de código sin duplicar código. 
+    Utiliza un parsing basado en regex y no en comparaciones de strings, lo que permite una mayor flexibilidad y robustez del procesamiento.
+    Da la posibilidad de añadir nuevos tipos de procesamiento de acciones sin cambiar la lógica  de traducción de la API del bot. En otras palabras, para añadir procesamiento de lenguaje natural, no hay que hacer grandes modificaciones al parser, solo hay que añadir el handler correspondiente.

@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{n}{string} \PYG{n}{title} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}This is a Unicode π in the sky\PYGZdq{}}
+  \PYG{c+c1}{\PYGZsh{} Defined as \PYGZdl{}\PYGZbs{}pi=\PYGZbs{}lim\PYGZus{}\PYGZob{}n\PYGZbs{}to\PYGZbs{}infty\PYGZcb{}\PYGZbs{}frac\PYGZob{}P\PYGZus{}n\PYGZcb{}\PYGZob{}d\PYGZcb{}\PYGZdl{} where \PYGZdl{}P\PYGZdl{} is the perimeter}
+  \PYG{c+c1}{\PYGZsh{}of an \PYGZdl{}n\PYGZdl{}\PYGZhy{}sided regular polygon circumscribing a}
+  \PYG{c+c1}{\PYGZsh{}circle of diameter \PYGZdl{}d\PYGZdl{}.}
+  \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+s2}{  def message\PYGZus{}processing(self, t\PYGZus{}chat, message, label=None, question=None ):}
+\PYG{l+s+s2}{      messages = []}
+\PYG{l+s+s2}{      if label is None:}
+\PYG{l+s+s2}{          if message == \PYGZsq{}/start\PYGZsq{}:}
+\PYG{l+s+s2}{          messages = [ \PYGZob{}\PYGZdq{}text\PYGZdq{}: \PYGZsq{}Hola ...\PYGZsq{},}
+\PYG{l+s+s2}{           \PYGZdq{}keyboard\PYGZdq{}: }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}\PYG{l+s+s2}{\PYGZcb{},...]}
+\PYG{l+s+s2}{          elif message == \PYGZsq{}/preguntasFrecuentes\PYGZsq{}: ...}
+\PYG{l+s+s2}{          elif message == \PYGZsq{}/asistente\PYGZsq{}: ...}
+\PYG{l+s+s2}{      Else: ...}
+\PYG{l+s+s2}{          elif label == \PYGZsq{}Process\PYGZsq{}: ...}
+\PYG{l+s+s2}{          elif label == \PYGZsq{}Category\PYGZsq{}: ...}
+\PYG{l+s+s2}{          elif label == \PYGZsq{}Question\PYGZsq{}: ...}
+\PYG{l+s+s2}{          elif label == \PYGZsq{}Helper\PYGZsq{}:  ...}
+
+\PYG{l+s+s2}{      for msg in messages:}
+\PYG{l+s+s2}{          self.send\PYGZus{}message(msg[\PYGZsq{}text\PYGZsq{}],}
+\PYG{l+s+s2}{           t\PYGZus{}chat[\PYGZdq{}id\PYGZdq{}], msg[\PYGZsq{}keyboard\PYGZsq{}])}
+\end{Verbatim}

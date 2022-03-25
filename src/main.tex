@@ -1,13 +1,5 @@
 \documentclass{umemoria}
 
-\usepackage{lipsum}
-\usepackage[utf8]{inputenc}
-\usepackage[acronym, toc]{glossaries}
-\usepackage[fixlanguage]{babelbib}
-\usepackage{url}
-\usepackage[T1]{fontenc}
-\usepackage{import}
-\usepackage{hyperref}
 
 \makeglossaries
 
@@ -21,41 +13,43 @@
 
 \comision{}
 
+
+\addbibresource{bibliografia.bib}
 \begin{document}
 
 \frontmatter
 \maketitle
 
-\input{sections/glosario.tex} % opcional
+\input{chapters/glosario.tex} % opcional
 
-\input{sections/0-Resumen.tex}
-\input{sections/1-Dedicatoria.tex}
-\input{sections/2-Agradeciemientos.tex}
-% \input{sections/3-test.tex}
-
+\input{chapters/0-Resumen.tex}
+\input{chapters/1-Dedicatoria.tex}
+\input{chapters/2-Agradeciemientos.tex}
 \tableofcontents
 \listoftables % opcional
-\listoffigures % opcional
+\listoffigures % opcional 
 
 \mainmatter
 
-% \input{intro.tex}
-% \input{cap2.tex}
-% \input{cap3.tex}
-% \input{conclu.tex}
+\input{chapters/3-Introduccion.tex}
+\input{chapters/4-Marco_teorico.tex}
+\input{chapters/5-Trabajo_previo.tex}
+\input{chapters/6-Analisis_y_diseño.tex}
+\input{chapters/7-Implementación.tex}
+\input{chapters/8-Validaciones.tex}
+\input{chapters/9-conclusiones.tex}
+\input{chapters/apendice.tex}
 
-% ver https://www.overleaf.com/learn/latex/Glossaries
 
-
-
-
-\printglossaries[type=\acronymtype]
+% \printglossaries[type=\acronymtype]
 \printglossaries
 
 \nocite{*}
-\bibliographystyle{babplain}
-\bibliography{bibliografia}
+% \bibliographystyle{babplain}
 
-\input{sections/apendice.tex}
+% \bibliography{bibliografia}
+\printbibliography
+
+\input{chapters/apendice.tex}
 
 \end{document}

@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+             \PYG{n}{language}\PYG{o}{=}\PYG{n}{Python}\PYG{p}{,}
+             \PYG{n}{caption}\PYG{o}{=}\PYG{n}{Ejemplo} \PYG{n}{de} \PYG{n}{fixture} \PYG{n}{para} \PYG{n}{el} \PYG{n}{proceso} \PYG{n}{de} \PYG{n}{postulación} \PYG{n}{a} \PYG{n}{becas}\PYG{p}{,}
+             \PYG{n}{label}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{n}{lst}\PYG{p}{:}\PYG{n}{ejemplo}\PYG{o}{\PYGZhy{}}\PYG{n}{fixture}\PYG{p}{\PYGZcb{}}
+             \PYG{n}{framexleftmargin}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{n}{mm}\PYG{p}{]}
+
+             \PYG{k}{def} \PYG{n+nf}{message\PYGZus{}processing}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{t\PYGZus{}chat}\PYG{p}{,} \PYG{n}{message}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{question}\PYG{o}{=}\PYG{k+kc}{None} \PYG{p}{):}
+                 \PYG{n}{messages} \PYG{o}{=} \PYG{p}{[]}
+                 \PYG{k}{if} \PYG{n}{label} \PYG{o+ow}{is} \PYG{k+kc}{None}\PYG{p}{:}
+                     \PYG{k}{if} \PYG{n}{message} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}/start\PYGZsq{}}\PYG{p}{:}
+                     \PYG{n}{messages} \PYG{o}{=} \PYG{p}{[} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}text\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}Hola ...\PYGZsq{}}\PYG{p}{,}
+                      \PYG{l+s+s2}{\PYGZdq{}keyboard\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}\PYGZcb{}\PYGZcb{},}\PYG{o}{...}\PYG{p}{]}
+                     \PYG{k}{elif} \PYG{n}{message} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}/preguntasFrecuentes\PYGZsq{}}\PYG{p}{:} \PYG{o}{...}
+                     \PYG{k}{elif} \PYG{n}{message} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}/asistente\PYGZsq{}}\PYG{p}{:} \PYG{o}{...}
+                 \PYG{n}{Else}\PYG{p}{:} \PYG{o}{...}
+                     \PYG{k}{elif} \PYG{n}{label} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}Process\PYGZsq{}}\PYG{p}{:} \PYG{o}{...}
+                     \PYG{k}{elif} \PYG{n}{label} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}Category\PYGZsq{}}\PYG{p}{:} \PYG{o}{...}
+                     \PYG{k}{elif} \PYG{n}{label} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}Question\PYGZsq{}}\PYG{p}{:} \PYG{o}{...}
+                     \PYG{k}{elif} \PYG{n}{label} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}Helper\PYGZsq{}}\PYG{p}{:}  \PYG{o}{...}
+
+                 \PYG{k}{for} \PYG{n}{msg} \PYG{o+ow}{in} \PYG{n}{messages}\PYG{p}{:}
+                     \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}message}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}text\PYGZsq{}}\PYG{p}{],}
+                      \PYG{n}{t\PYGZus{}chat}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}id\PYGZdq{}}\PYG{p}{],} \PYG{n}{msg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}keyboard\PYGZsq{}}\PYG{p}{])}
+\end{Verbatim}

@@ -35,7 +35,7 @@
 \LoadClass[12pt,letterpaper,oneside]{book}
 
 %% Packages necesarios
-\RequirePackage[utf8]{inputenc} %Encoding
+% \RequirePackage[utf8]{inputenc} %Encoding % uncomment with LUA
 \RequirePackage[top=2cm, left=3cm, bottom=2cm, right=2cm, paper=letterpaper]{geometry} % Margenes
 \RequirePackage{amsmath, amssymb, amsthm, graphicx} % Varios
 
@@ -234,7 +234,7 @@
 \renewcommand{\maketitle}{
 	\begin{titlepage}
 		\begin{minipage}{1.6cm}
-			\includegraphics[scale=.12]{imagenes/escudoU2014.pdf}
+			\includegraphics[scale=.12]{media/imagenes/institucion/escudoU2014.pdf}
 		\end{minipage}
 		\begin{minipage}[t]{12cm}
 			\MakeUppercase\@universidad\\\MakeUppercase\@facultad\\\MakeUppercase\@depto
@@ -316,12 +316,12 @@
 \makeatother
 
 %% Miscelaneos
+% \newcommand{\G}{\mathcal{G}}
+% \newcommand{\C}{\mathbb{C}}
 \newcommand{\A}{\mathcal{A}}
-\newcommand{\C}{\mathbb{C}}
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\F}{\mathcal{F}}
-\newcommand{\G}{\mathcal{G}}
 \renewcommand{\H}{\mathcal{H}}
 \newcommand{\K}{\mathcal{K}}
 \renewcommand{\L}{\mathcal{L}}
@@ -336,3 +336,88 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\1}{\mathbf{1}}
 \let\epsilon\varepsilon
+
+% SHELLOW ADDED
+\RequirePackage{minted}
+\usepackage{luainputenc}
+% \RequirePackage[T1]{fontenc}  %comment if use lua or xe
+% \RequirePackage[utf8]{inputenc} % comment if use lua or xe
+\RequirePackage{lipsum} % to create lorem ipsum texts
+\RequirePackage[acronym, toc]{glossaries} % to make glossaries and acronyms
+% \RequirePackage[fixlanguage]{babelbib} %
+\RequirePackage[backend=biber]{biblatex}
+\RequirePackage{csquotes}
+\RequirePackage{url} 
+\RequirePackage{import} % to import things ?
+\RequirePackage{hyperref} % 
+\RequirePackage{graphicx} % to use images
+\RequirePackage{float} % to float (move, center) images
+\RequirePackage{fontspec} % For use a custom font Use only with XeTex or LuaTex
+\RequirePackage{minted}
+
+
+\renewcommand{\lstlistingname}{Sección de Código}
+
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+
+  % frame=lines,
+\usemintedstyle{friendly}
+
+\setmonofont{Fira Code}[
+	Contextuals=Alternate  % Activate the calt feature
+  ]
+
+%	SET code style for the document
+\setminted[python]{
+  mathescape,
+  linenos,
+  numbersep=5pt,
+  gobble=2,
+  frame=leftline,
+  framesep=2mm,
+  bgcolor=bg}
+
+%	set a custom style
+  \newminted{py}{
+    mathescape,
+    linenos,
+    numbersep=5pt,
+    gobble=2,
+    frame=leftline,
+    framesep=2mm,
+    bgcolor=bg2}
+  
+% EXAMPLE
+% \begin{listing}[H]
+% 	\mint{python}/(car (cons 1 '(2)))/
+% 	\caption{Example of a listing.}
+% 	\label{lst:example}
+%   \end{listing}
+  
+%   \begin{pycode}
+% 	"""
+% 	Defined as $\pi=\lim_{n\to\infty}\frac{P_n}{d}$ where $P$ is the perimeter
+% 	of an $n$-sided regular polygon circumscribing a
+% 	circle of diameter $d$.
+% 	"""
+% 	def message_processing(self, t_chat, message, label=None, question=None ):
+% 		messages = []
+% 		if label is None:
+% 			if message == '/start':
+% 			messages = [ {"text": 'Hola ...',
+% 			 "keyboard": {}},...]
+% 			elif message == '/preguntasFrecuentes': ...
+% 			elif message == '/asistente': ... 
+% 		Else: ...
+% 			elif label == 'Process': ...
+% 			elif label == 'Category': ...
+% 			elif label == 'Question': ...
+% 			elif label == 'Helper':  ...
+		
+% 		for msg in messages:
+% 			self.send_message(msg['text'],
+% 			 t_chat["id"], msg['keyboard'])
+	
+	
+%   \end{pycode}
