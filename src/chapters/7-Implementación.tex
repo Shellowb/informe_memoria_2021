@@ -1,21 +1,20 @@
-\chapter{Implementación}
+\chapter{Implementación}\label{sec:imple}
+    \par A partir del análisis y diseño, se realizó la implementación del sistema, los pasos expuestos en la metodología son Reestructuración, Implementación de la nueva Arquitectura, Implementación de nuevas funcionalidades, y un análisis de los problemas
 
-\section{Reestructuración}
+\section{Reestructuración}\label{imp:refactoring}
 
     El código existente para el bot contenía varios problemas de diseño que hacían compleja su extensibilidad y se pueden revisar detalladamente en la sección de trabajo previo.
 
     \par Para solucionar estos problemas primero se extrajeron las funcionalidades clave del bot: Obtener información desde la base de datos, recibir request, procesar request y enviar mensajes. La extracción de información, la recepción y envío de mensajes en sí no presentaba mayores problemas de diseño. 
 
-    \subsection{Procesar request}
+    \subsection{Cambio en el procesamiento de las Requests}
 
-    \subsubsection{De if a Parser}
+    \subsubsection{Cambio de procesamiento condicional a parser}
     
         \par Cómo se vio en la sección de trabajo previo, la API de telegram permite varias formas de comunicación. De ellas se utilizan los websockets. A partir de aquí, los bots pueden recibir todos los mensajes enviados por el usuario, sin embargo, telegram permite agrupar los mensajes en más o menos 4 modalidades: primero texto, archivos o media adjunta, comandos y los keyboards.
 
         \par En el diseño anterior, como se explicó, se seleccionaron principalmente una manera de comunicación  a través de inline keyboards. (sección anterior: En este tipo de comunicación se presentan al usuario una serie de botones que el puede apretar y a partir de los se envia un mensaje al servidor, cuando este es procesado se envía la respuesta al usuario de manera asincrona). Para poder desarrollar las nuevas features, se añadieron comandos, en miras tambien de procesar texto. Se amplió el diseño para pasar de una decisión condicional a un parsing con double dispatch.
 
-
-        \textbf{Sistema de procesamiento anterior}
         \begin{listing}
             \begin{minted}{python}
                 def message_processing(self, t_chat, message, 
@@ -40,7 +39,6 @@
              \caption[sistema de procesamiento anterior]{Sistema de procesamiento basado en ifs sobre el tipo de comunicación y la expresión de texto}
         \end{listing}
 
-        \textbf{Nuevo sistema de procesamiento}
         \begin{minted}{python}
             def post(self, request: AsgiRequest, *args, **kwargs):
                 update = request.body
@@ -59,8 +57,6 @@
                         else:
                             return Updates.UpdateProccesingResult()
         \end{minted}
-
-
 
 
     \par Cómo se puede apreciar en este nuevo sistema, el parser se hace cargo de determinar que tipo de update o actualización fue recibida desde telegram y a partir de esa detección se pasa la expresión recibida a un handler, este determina que acción debe realizarse y luedo llama a la instancia determinada de la acción para que se procese la request. Este nuevo modelo es util principalmente por 5 razones.
@@ -96,7 +92,7 @@
                         self.help_command.do_action(chat_id=for_id)
         \end{minted}
 
-    \subsubsection{Actions}
+    \subsubsection{Creación de un modelo OO para respuestas}
         \par Un tercer aspecto es que se extrapolo el concepto de acción a una clase abstracta Action, utilizando el modulo abc de python. El único compromiso de esta clase es realizar una acción. Y a esta clase la extiende dos clases una es Command y la otra es CallBackQuery. Que agrupan las funcionalidades tipicas de cada forma de comunicación, esto permite al handler instanciar varios Commands o CallBackQueries por ejemplo y llamar  \mintinline{python}{do_action} en cada una para representar la acción buscada por el usuario.
         Esto también permite diseñar la respuesta a cada acción de manera individual ocultando la complejidad del modelo de interacción.
 
@@ -111,33 +107,33 @@
         Imagen vs modelo anterior actual
 
 
-% \begin{tabular}{c c}
-%     Message -> BOT endpoint
-% BOT view :
-% # 1
-%  If Typeof Comunication1:
-%   If Typeof Action1:
-%     Action1 code....
+    % \begin{tabular}{c c}
+    %     Message -> BOT endpoint
+    % BOT view :
+    % # 1
+    %  If Typeof Comunication1:
+    %   If Typeof Action1:
+    %     Action1 code....
 
-%   If Typeof Action2:
-%     Action2 code....
+    %   If Typeof Action2:
+    %     Action2 code....
 
-%   If Typeof ActionN:
-%     ActionN code....
-% ...
-%  If Typeof Comunication2:
-%   If Typeof Action2:
-% ...
-%  If Typeof ComunicationN:
-%     &
-%     Message -> BOT endpoint
+    %   If Typeof ActionN:
+    %     ActionN code....
+    % ...
+    %  If Typeof Comunication2:
+    %   If Typeof Action2:
+    % ...
+    %  If Typeof ComunicationN:
+    %     &
+    %     Message -> BOT endpoint
 
-% Bot view -> Parser(Comunication way)
+    % Bot view -> Parser(Comunication way)
 
-% Parser -> Handler(Action)
+    % Parser -> Handler(Action)
 
-% Handler -> Action.do_action()
-% \end{tabular}
+    % Handler -> Action.do_action()
+    % \end{tabular}
 
 
 
@@ -145,64 +141,72 @@
 
     \par Se migró de un modelo no extensible (según la lógica de diseño modular) a uno extensible. Se ordenaron en capas la resolución de mensajes y se modularizó y estandarizó la manera de tomar la acción debida en cada situación.
 
- \section {Nuevas Funcionalidades}
-    \subsection{Tareas}
-        \par Algunas de las funcionalidades comprometidas requerían la ejecución de tareas de forma asíncrona. Particularmente las funcionalidades de subscripción, tales como los recordatorios. Ya que se debía levantar una notificación en el momento indicado para cada usuario. Con este fin, se agregó la librería “celery” para el manejo de tareas en python.
-        \par Celery, es un gestor de tareas o cola de tareas y trabaja en base a un broker, eso significa que puede recibir tareas desde diferentes instancias o servicios, y procesaralas de forma eficiente.
-        \par La gran ventaja es que para realizar esto se configura una aplicación de celery, esta “entidad” se encarga de enlazar las configuraciones hechas en el código por el desarrollador a un worker. Un worker es una instancia de celery que funciona como un thread o proceso. Entonces celery envía a través del broker las tareas que esten configuradas en una APP a un proceso que las ejecuta. En celery se pueden ejecutar tareas directamente, de forma asíncrona o programadas.
-        \par A continuación se explica como se usan tareas para lograr hacer funcionar los recordatorios.
-        \begin{itemize}
-            \item \textbf{Subscripciones:} Una suscripción cómo se explicó en el proceso de diseño es la capacidad que le da el sistema al usuario de elegir de entre una colección de opciones, una o más a las que suscribirse par obtener información relevante en una cierta frecuencia. Para poder entregar estos mensajes en el momento especificado se crean notificaciones y se requiere un proceso de actualización.
-            \item \textbf{Notificaciones:} Una Notificación, en este sistema es un mensaje que debe ser enviado a un usuario en algún momento
-        \end{itemize}
-    
+\section{Nuevas Funcionalidades}
+    \subsection{Adopción de un framework para taras asíncronas}
+    \par Algunas de las funcionalidades comprometidas requerían la ejecución de tareas de forma asíncrona. Particularmente las funcionalidades de subscripción, tales como los recordatorios. Ya que se debía levantar una notificación en el momento indicado para cada usuario. Con este fin, se agregó la librería “celery” para el manejo de tareas en python.
+    \par Celery, es un gestor de tareas o cola de tareas y trabaja en base a un broker, eso significa que puede recibir tareas desde diferentes instancias o servicios, y procesaralas de forma eficiente.
+    \par La gran ventaja es que para realizar esto se configura una aplicación de celery, esta “entidad” se encarga de enlazar las configuraciones hechas en el código por el desarrollador a un worker. Un worker es una instancia de celery que funciona como un thread o proceso. Entonces celery envía a través del broker las tareas que esten configuradas en una APP a un proceso que las ejecuta. En celery se pueden ejecutar tareas directamente, de forma asíncrona o programadas.
+    \par A continuación se explica como se usan tareas para lograr hacer funcionar los recordatorios.
+    \begin{itemize}
+        \item \textbf{Subscripciones:} Una suscripción cómo se explicó en el proceso de diseño es la capacidad que le da el sistema al usuario de elegir de entre una colección de opciones, una o más a las que suscribirse par obtener información relevante en una cierta frecuencia. Para poder entregar estos mensajes en el momento especificado se crean notificaciones y se requiere un proceso de actualización.
+        \item \textbf{Notificaciones:} Una Notificación, en este sistema es un mensaje que debe ser enviado a un usuario en algún momento
+    \end{itemize}
+
     \subsection{Sistema de Suscripciones}
-        \par Las susbscripciones son un sistema de 3 pasos: primero se crea una suscripción, más una notificación asociada y luego el sistema revisa periódicamente las notificicaciones almacenadas para decidir cuáles corresponden a ser enviadas. Finalmente modifica la notificación para que almacene el próximo envío.
-        Para revisar periódicamente las notificaciones, se establecieron tareas recurrentes con celery que revisan la base de datos manera constante y en el caso de encontrar una colección de notificaciones que deben enviarse hoy, se envían. 
-        De este modelo el envío de las notificaciones se realiza por parte del gestor de tareas.
-        Esto da un comportamiento dual en el que las suscripciones se realizan de manera síncrona (por el usuario) y las notificaciones se envía de forma programada (por el sistema).
-        \par La configuración de celery es simple, ya que se realiza una breve configuración inicial y las tareas simplemente se identifican con @decorators\footnote{ Los @decorators de python, son azúcar sintáctico, en el que nombre del wraper se corresponde con una función del mismo nombre, esta última recibe cómo parámetro la función que el @decorator acompaña.} de Python  
-        El código queda más o menos así:
+    \par Las susbscripciones son un sistema de 3 pasos: primero se crea una suscripción, más una notificación asociada y luego el sistema revisa periódicamente las notificicaciones almacenadas para decidir cuáles corresponden a ser enviadas. Finalmente modifica la notificación para que almacene el próximo envío.
+    Para revisar periódicamente las notificaciones, se establecieron tareas recurrentes con celery que revisan la base de datos manera constante y en el caso de encontrar una colección de notificaciones que deben enviarse hoy, se envían. 
+    De este modelo el envío de las notificaciones se realiza por parte del gestor de tareas.
+    Esto da un comportamiento dual en el que las suscripciones se realizan de manera síncrona (por el usuario) y las notificaciones se envía de forma programada (por el sistema).
+    \par La configuración de celery es simple, ya que se realiza una breve configuración inicial y las tareas simplemente se identifican con @decorators\footnote{ Los @decorators de python, son azúcar sintáctico, en el que nombre del wraper se corresponde con una función del mismo nombre, esta última recibe cómo parámetro la función que el @decorator acompaña.} de Python  
+    El código queda más o menos así:
 
-        \begin{minted}{python}
-            app = Celery('API')
-            app.config_from_object('django.conf:settings', namespace='CELERY')
-            app.autodiscover_tasks()
+    \begin{minted}{python}
+        app = Celery('API')
+        app.config_from_object('django.conf:settings', namespace='CELERY')
+        app.autodiscover_tasks()
 
-            app.conf.beat_schedule = {
-                # Executes every Monday morning at 7:30 a.m.
-                'add-every-minute': {
-                    'task': 'tasks.send_today_notifications',
-                    'schedule': crontab(minute=1)
-                },}
+        app.conf.beat_schedule = {
+            # Executes every Monday morning at 7:30 a.m.
+            'add-every-minute': {
+                'task': 'tasks.send_today_notifications',
+                'schedule': crontab(minute=1)
+            },}
 
-            @shared_task
-            def send_today_notifications():
-                notifications = Notification.get_today_notifications()
-                messages = [] #[{"text": '', "keyboard": {}}]
-                
-                for notification in notifications:
-                    msg = markup_clearner(f'{notification.msg}')
-                    try:
-                        notf_susc = notification.subscription
-                        notf_chat = notf_susc.chat
-                        print(notf_chat)
-                    except:
-                        notf_chat = None
-                    notf_message = {'text': msg, 'keyboard': {}, 'chat': notf_chat}
-                    messages.append(notf_message)
+        @shared_task
+        def send_today_notifications():
+            notifications = Notification.get_today_notifications()
+            messages = [] #[{"text": '', "keyboard": {}}]
+            
+            for notification in notifications:
+                msg = markup_clearner(f'{notification.msg}')
+                try:
+                    notf_susc = notification.subscription
+                    notf_chat = notf_susc.chat
+                    print(notf_chat)
+                except:
+                    notf_chat = None
+                notf_message = {'text': msg, 'keyboard': {}, 'chat': notf_chat}
+                messages.append(notf_message)
 
-                for msg in messages:
-                    if msg['chat'] is None:
-                        continue
-                    async_send(msg['text'], msg['chat'], msg['keyboard'])
-        \end{minted}
+            for msg in messages:
+                if msg['chat'] is None:
+                    continue
+                async_send(msg['text'], msg['chat'], msg['keyboard'])
+    \end{minted}
 
-        \par Algunas notas sobre el sistema de Subscripciones. Para lograr programar tareas se utiliza un módulo de celery que se ejecuta como un proceso paralelo llamado celery beat. Además los resultados de las tareas y las tareas programadas se guardan en la base de datos. De esta forma hay al menos 2 procesos paralelos en ejecución un worker de la aplicación y beat el programador que hace uso de la db.
+    \par Algunas notas sobre el sistema de Subscripciones. Para lograr programar tareas se utiliza un módulo de celery que se ejecuta como un proceso paralelo llamado celery beat. Además los resultados de las tareas y las tareas programadas se guardan en la base de datos. De esta forma hay al menos 2 procesos paralelos en ejecución un worker de la aplicación y beat el programador que hace uso de la db.
 
-\section{Nueva arquitectura Física}
+\newpage
+\section{Cambios en Diseño}
 
-    Diagrama.
+    \subsection{Cambios en la arquitectura}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\textwidth]{media/diagramas/arquitectura/nueva_arquitectura.png}
+        \caption[Nueva arquitectura]{Diagrama de arquitectura del nuevo sistema}
+        \label{fig:arc-new}
+    \end{figure}
 
 
     \par La nueva arquitectura cómo se puede apreciar en el diagrama integra:
@@ -215,10 +219,15 @@
         \item \textbf{Celery:} Maneja las tareas programadas, asíncronas y directas desde la aplicación.
     \end{itemize}
     
-   
-\section{Nueva Arquitectura Lógica}
+    \subsection{Cambios en los módulos}
 
-    Diagrama
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\textwidth]{media/diagramas/arquitectura/arc-logica.png}
+        \caption[Nueva arquitectura]{Diagrama de arquitectura del nuevo sistema}
+        
+    \end{figure}
+  
 
     Módulos ya existentes
     \begin{itemize}
@@ -252,4 +261,9 @@
     \par La suma de todos estos problemas hizo que fuera difícil configurar el proyecto, hacer trazabilidad de los errores, y una vez configurador entender por qué ciertas líneas de código funcionaban para ciertos objetos en la base de datos y para otros no.
     \par Sumado a esto Celery y djongo son librerías bastantante activas, de hecho Celery cambió completamente su documentación de dominio hace solo unos meses, las últimas releases son del 2021, aunque ha habido convenciones anuales por Varios años. Por otro lado djongo se actualizó de ser una librería libre, a tener una versión de pago para empresas, a dar soporte, incluso ahora se ofrecen otros servicios cloud usando mongo Atlas entre otros.
     \par Esto hace que mantener el proyecto requiera de estar en constante revisión de los recursos utilizados, ya que las dependencias están en constante actualización. Esta fue una de las lecciones más importantes del proyecto, a la vez que uno de los mayores desafíos.
-|
+
+\section{Resumen}
+
+    \par Inicialmente se propusieron el análisis y reestructuración de código existente para soportar las nuevas funcionalidades. Además dentro de las nuevas funcionalidades se propuso creer un sistema que permitiera ser personalizado y confiable, a partir del análisis del \acrlong{f}, se añadieron variables sobre la privacidad, parametrización y eficiencia.
+    \par A partir de diseño y de las evaluaciones se priorizaron las funcionalidades más complejas en términos de implementación, menos controversiales y con más apoyo de los usuarios. Esto derivó en que no se realizaran cambios para agregar información a las respuestas y mejorar el modelo de feedback del usuario. Esto sumado a las \textit{features} que requieren análisis de privacidad usualmente requieren especificar más de una vía de acción.
+    \par A modo general se cumplió con lo planificando priorizando los cambios de mayor envergadura. Se corrigieron bugs y se mejoró el estilo de procesamiento del bot, para permitir dejar un sistema extensible.

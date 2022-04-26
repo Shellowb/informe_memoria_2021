@@ -1,8 +1,9 @@
 /.idea/
-/memoria_2021.iml
 informe/src/out/
-
+src/_minted-main/*
 src/out/
+
+/memoria_2021.iml
 src/main.acn
 src/main.aux
 src/main.bbl
@@ -26,3 +27,9 @@ propuesta/CC6908-1 Introducción al Trabajo de Título 2021/material_docente/pla
 propuesta/CC6908-1 Introducción al Trabajo de Título 2021/material_docente/plantilla/02-informe/propuesta.log
 propuesta/CC6908-1 Introducción al Trabajo de Título 2021/material_docente/plantilla/02-informe/propuesta.out
 propuesta/CC6908-1 Introducción al Trabajo de Título 2021/material_docente/plantilla/02-informe/propuesta.synctex.gz
+src/_minted-main/6E6048B1FA8CE4ADDAE27E9259BA9F7165D427A48CF461C1E4EDF41A188071C7.pygtex
+src/_minted-main/68B329DA9893E34099C7D8AD5CB9C940EED0F18233776CBE5B53FF396AA7B09D.pygtex
+src/_minted-main/895AB43307E2663512130A5D6B87360565D427A48CF461C1E4EDF41A188071C7.pygtex
+src/_minted-main/92493DC2AB81BF8111CC12F9CBEF548065D427A48CF461C1E4EDF41A188071C7.pygtex
+src/_minted-main/BBCB7D706A54C5C8698C32FFE59A33AB65D427A48CF461C1E4EDF41A188071C7.pygtex
+src/_minted-main/F9A78D325E488B0D01F15BBCC8DD743965D427A48CF461C1E4EDF41A188071C7.pygtex

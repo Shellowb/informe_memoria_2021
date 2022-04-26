@@ -361,8 +361,9 @@
 \definecolor{bg2}{RGB}{200, 200, 200}
 
 
-\renewcommand{\lstlistingname}{Sección de Código}
+% \renewcommand{\listingname}{Sección de Código}
 \SetupFloatingEnvironment{listing}{name=Codigo}
+\SetupFloatingEnvironment{listing}{listname=Lista de Código}
 
 \renewcommand{\theFancyVerbLine}{
   \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
@@ -381,10 +382,10 @@
   breakanywhere,
   linenos,
   numbersep=5pt,
-  autogobble=2,
+  autogobble,
   frame=leftline,
   framesep=2mm,
-  fontsize = \small,
+  fontsize=\footnotesize,
   bgcolor=bg}
 
 %	set a custom style
@@ -397,6 +398,7 @@
     gobble=2,
     frame=leftline,
     framesep=2mm,
+	fontsize=\footnotesize,
     bgcolor=bg2}
   
 % EXAMPLE
