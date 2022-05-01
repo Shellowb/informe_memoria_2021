@@ -38,3 +38,7 @@ src/main.alg
 src/main.bcf
 src/main.glg
 src/_minted-main/friendly.pygstyle
+src/*.acr
+src/*.alg
+src/*.bcf
+src/*.glg

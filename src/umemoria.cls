@@ -337,7 +337,11 @@
 \newcommand{\1}{\mathbf{1}}
 \let\epsilon\varepsilon
 
-% SHELLOW ADDED
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SHELLOW ADDED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% for better compatibility use LuaLatex or XeTex
+
 \RequirePackage{minted}
 \usepackage{luainputenc}
 % \RequirePackage[T1]{fontenc}  %comment if use lua or xe
