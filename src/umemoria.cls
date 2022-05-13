@@ -1,12 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%
 %%%%%%%%	Clase U-Memoria
-%%%%%%%%	Primer Autor: Nikolas Tapia M.
-%%%%%%%%  Contacto: ntapia@dim.uchile.cl
-%%%%%%%%	Version: 1.6.1
-%%%%%%%%	Fecha: 23-09-2021
+%%%%%%%%	Primer Autor	: 	Nikolas Tapia M.
+%%%%%%%%	Modificaciones	: Marcelo Becerra A.
+%%%%%%%%  	Contactos		: ntapia@dim.uchile.cl, 
+%%%%%%%%					  marcelo.becerra@ug.uchile.cl
+%%%%%%%%	Version: 1.0.0 (no oficial)
+%%%%%%%%	Fecha: 08-10-2022
 %%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \NeedsTeXFormat{LaTeX2e}[2009/09/24]
 \ProvidesClass{umemoria}[2021/09/23 v1.6 Clase LaTeX para estandarizacion de Memorias U. de Chile]
 
@@ -35,7 +38,7 @@
 \LoadClass[12pt,letterpaper,oneside]{book}
 
 %% Packages necesarios
-% \RequirePackage[utf8]{inputenc} %Encoding % uncomment with LUA
+% \RequirePackage[utf8]{inputenc} %Encoding % comment with LUA
 \RequirePackage[top=2cm, left=3cm, bottom=2cm, right=2cm, paper=letterpaper]{geometry} % Margenes
 \RequirePackage{amsmath, amssymb, amsthm, graphicx} % Varios
 
@@ -56,7 +59,7 @@
 	\RequirePackage[spanish, es-nolists, es-lcroman]{babel} % Lenguaje
 \fi
 \RequirePackage[pdfpagelabels,hidelinks]{hyperref} % Links y numeracion del PDF
-\RequirePackage{listings} % Codigo Fuente
+\RequirePackage{listings} % Codigo Fuente			
 \RequirePackage{pgffor} % foreach
 
 %% Lenguaje
@@ -338,7 +341,7 @@
 \let\epsilon\varepsilon
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SHELLOW ADDED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Marcelo Modifications %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% for better compatibility use LuaLatex or XeTex
 
@@ -368,6 +371,7 @@
 % \renewcommand{\listingname}{Sección de Código}
 \SetupFloatingEnvironment{listing}{name=Codigo}
 \SetupFloatingEnvironment{listing}{listname=Lista de Código}
+\renewcommand\listingscaption{Sección de Código}
 
 \renewcommand{\theFancyVerbLine}{
   \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}

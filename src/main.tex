@@ -1,53 +1,51 @@
 \documentclass{umemoria}
 
-
+% format
 \makeglossaries
 \addbibresource{bibliografia.bib}
 
-
+% Information
 \depto{Departamento de Ciencias de la Computación}
 \author{Marcelo Esteban Becerra Alarcón}
 \title{Mejora de un sistema de mesa de ayuda para estudiantes del DCC}
 \memoria{Ingeniero Civil en Computación}
 \guia{Jocelyn Simmonds} 
-\comision{Felipe Bravo Márquez, Hugo Mora R.}
+\comision{Felipe Bravo Márquez, Hugo Mora Riquelme}
 
 
 
 \begin{document}
 
+    \input{content/additional/glosario.tex} % opcional
 
-\frontmatter
-\maketitle
+    \frontmatter
+        \maketitle
+        \input{content/frontmatter/0-Resumen.tex}
+        \input{content/frontmatter/1-Dedicatoria.tex}
+        \input{content/frontmatter/2-Agradeciemientos.tex}
+        \tableofcontents
+        % \listoftables % opcional
+        \listoffigures % opcional 
 
-\input{chapters/glosario.tex} % opcional
+    \mainmatter
+        \input{content/mainmatter/3-Introduccion.tex}
+        \input{content/mainmatter/4-Marco_teorico.tex}
+        \input{content/mainmatter/5-Trabajo_previo.tex}
+        \input{content/mainmatter/6-Analisis_y_diseño.tex}
+        \input{content/mainmatter/7-Implementación.tex}
+        \input{content/mainmatter/8-Validaciones.tex}
+        \input{content/mainmatter/9-conclusiones.tex}
+        % \input{chapters/apendice.tex}
 
-\input{chapters/0-Resumen.tex}
-% \input{chapters/1-Dedicatoria.tex}
-% \input{chapters/2-Agradeciemientos.tex}
-\tableofcontents
-% \listoftables % opcional
-\listoffigures % opcional 
-
-\mainmatter
-
-\input{chapters/3-Introduccion.tex}
-\input{chapters/4-Marco_teorico.tex}
-\input{chapters/5-Trabajo_previo.tex}
-\input{chapters/6-Analisis_y_diseño.tex}
-\input{chapters/7-Implementación.tex}
-\input{chapters/8-Validaciones.tex}
-\input{chapters/9-conclusiones.tex}
-\input{chapters/apendice.tex}
-
-\nocite{*}
-% \bibliographystyle{babplain}
-% \bibliography{bibliografia}
-\printbibliography
-
-\newpage
-\input{chapters/apendice.tex}
-% \printglossaries[type=\acronymtype]
-\printglossaries
-
+        \nocite{*}
+    \printglossaries
+    \newpage
+    % \bibliographystyle{babplain}
+    % \bibliography{bibliografia}
+    \addcontentsline{toc}{chapter}{Bibliografía}
+    \printbibliography
+    \newpage
+    \addcontentsline{toc}{chapter}{Anexo}
+    \input{content/additional/apendice.tex}
+    % \printglossaries[type=\acronymtype]
 \end{document}
